@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		126004941F25BCD7005BC1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126004931F25BCD7005BC1EF /* AppDelegate.swift */; };
+		126004961F25BCD7005BC1EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126004951F25BCD7005BC1EF /* ViewController.swift */; };
+		126004991F25BCD7005BC1EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 126004971F25BCD7005BC1EF /* Main.storyboard */; };
+		1260049C1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1260049A1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodeld */; };
+		1260049E1F25BCD7005BC1EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1260049D1F25BCD7005BC1EF /* Assets.xcassets */; };
+		126004A11F25BCD7005BC1EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1260049F1F25BCD7005BC1EF /* LaunchScreen.storyboard */; };
+		126004A91F273C73005BC1EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 126004A81F273C73005BC1EF /* GoogleService-Info.plist */; };
+		126004AB1F29C5A7005BC1EF /* DifficultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126004AA1F29C5A7005BC1EF /* DifficultyViewController.swift */; };
+		126004AD1F29CA15005BC1EF /* DifficultyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126004AC1F29CA15005BC1EF /* DifficultyCell.swift */; };
+		126004AF1F29DA12005BC1EF /* GymTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126004AE1F29DA12005BC1EF /* GymTableViewController.swift */; };
+		BC76342C0F7760F8C1B7CDBC /* Pods_TaiwanRockClimbing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8529CA72989E54E047CFC886 /* Pods_TaiwanRockClimbing.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		126004901F25BCD7005BC1EF /* TaiwanRockClimbing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaiwanRockClimbing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		126004931F25BCD7005BC1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		126004951F25BCD7005BC1EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		126004981F25BCD7005BC1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1260049B1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaiwanRockClimbing.xcdatamodel; sourceTree = "<group>"; };
+		1260049D1F25BCD7005BC1EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		126004A01F25BCD7005BC1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		126004A21F25BCD7005BC1EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		126004A81F273C73005BC1EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		126004AA1F29C5A7005BC1EF /* DifficultyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifficultyViewController.swift; sourceTree = "<group>"; };
+		126004AC1F29CA15005BC1EF /* DifficultyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifficultyCell.swift; sourceTree = "<group>"; };
+		126004AE1F29DA12005BC1EF /* GymTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymTableViewController.swift; sourceTree = "<group>"; };
+		203032E6FB78566A81B90705 /* Pods-TaiwanRockClimbing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanRockClimbing.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaiwanRockClimbing/Pods-TaiwanRockClimbing.release.xcconfig"; sourceTree = "<group>"; };
+		8529CA72989E54E047CFC886 /* Pods_TaiwanRockClimbing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaiwanRockClimbing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8870EE26C180FD5169B26A93 /* Pods-TaiwanRockClimbing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanRockClimbing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaiwanRockClimbing/Pods-TaiwanRockClimbing.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1260048D1F25BCD7005BC1EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC76342C0F7760F8C1B7CDBC /* Pods_TaiwanRockClimbing.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		126004871F25BCD7005BC1EF = {
+			isa = PBXGroup;
+			children = (
+				126004921F25BCD7005BC1EF /* TaiwanRockClimbing */,
+				126004911F25BCD7005BC1EF /* Products */,
+				78019D00356C89D68C974D9A /* Pods */,
+				D11C3AF6A2912DB2155D2E0B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		126004911F25BCD7005BC1EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				126004901F25BCD7005BC1EF /* TaiwanRockClimbing.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		126004921F25BCD7005BC1EF /* TaiwanRockClimbing */ = {
+			isa = PBXGroup;
+			children = (
+				126004931F25BCD7005BC1EF /* AppDelegate.swift */,
+				126004951F25BCD7005BC1EF /* ViewController.swift */,
+				126004971F25BCD7005BC1EF /* Main.storyboard */,
+				126004AE1F29DA12005BC1EF /* GymTableViewController.swift */,
+				126004AC1F29CA15005BC1EF /* DifficultyCell.swift */,
+				126004AA1F29C5A7005BC1EF /* DifficultyViewController.swift */,
+				1260049D1F25BCD7005BC1EF /* Assets.xcassets */,
+				1260049F1F25BCD7005BC1EF /* LaunchScreen.storyboard */,
+				126004A21F25BCD7005BC1EF /* Info.plist */,
+				126004A81F273C73005BC1EF /* GoogleService-Info.plist */,
+				1260049A1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodeld */,
+			);
+			path = TaiwanRockClimbing;
+			sourceTree = "<group>";
+		};
+		78019D00356C89D68C974D9A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8870EE26C180FD5169B26A93 /* Pods-TaiwanRockClimbing.debug.xcconfig */,
+				203032E6FB78566A81B90705 /* Pods-TaiwanRockClimbing.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D11C3AF6A2912DB2155D2E0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8529CA72989E54E047CFC886 /* Pods_TaiwanRockClimbing.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1260048F1F25BCD7005BC1EF /* TaiwanRockClimbing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 126004A51F25BCD7005BC1EF /* Build configuration list for PBXNativeTarget "TaiwanRockClimbing" */;
+			buildPhases = (
+				8C54F346C311B5EE6FC101B6 /* [CP] Check Pods Manifest.lock */,
+				1260048C1F25BCD7005BC1EF /* Sources */,
+				1260048D1F25BCD7005BC1EF /* Frameworks */,
+				1260048E1F25BCD7005BC1EF /* Resources */,
+				E1B47D56D53601A2CFE6E6F4 /* [CP] Embed Pods Frameworks */,
+				16BC23D395E7D54DDA783C30 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TaiwanRockClimbing;
+			productName = TaiwanRockClimbing;
+			productReference = 126004901F25BCD7005BC1EF /* TaiwanRockClimbing.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		126004881F25BCD7005BC1EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "戴其安";
+				TargetAttributes = {
+					1260048F1F25BCD7005BC1EF = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = Q7N8D3YCYC;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1260048B1F25BCD7005BC1EF /* Build configuration list for PBXProject "TaiwanRockClimbing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 126004871F25BCD7005BC1EF;
+			productRefGroup = 126004911F25BCD7005BC1EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1260048F1F25BCD7005BC1EF /* TaiwanRockClimbing */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1260048E1F25BCD7005BC1EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				126004A11F25BCD7005BC1EF /* LaunchScreen.storyboard in Resources */,
+				126004A91F273C73005BC1EF /* GoogleService-Info.plist in Resources */,
+				1260049E1F25BCD7005BC1EF /* Assets.xcassets in Resources */,
+				126004991F25BCD7005BC1EF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		16BC23D395E7D54DDA783C30 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TaiwanRockClimbing/Pods-TaiwanRockClimbing-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C54F346C311B5EE6FC101B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1B47D56D53601A2CFE6E6F4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TaiwanRockClimbing/Pods-TaiwanRockClimbing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1260048C1F25BCD7005BC1EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				126004961F25BCD7005BC1EF /* ViewController.swift in Sources */,
+				126004AF1F29DA12005BC1EF /* GymTableViewController.swift in Sources */,
+				126004941F25BCD7005BC1EF /* AppDelegate.swift in Sources */,
+				126004AD1F29CA15005BC1EF /* DifficultyCell.swift in Sources */,
+				1260049C1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodeld in Sources */,
+				126004AB1F29C5A7005BC1EF /* DifficultyViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		126004971F25BCD7005BC1EF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				126004981F25BCD7005BC1EF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1260049F1F25BCD7005BC1EF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				126004A01F25BCD7005BC1EF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		126004A31F25BCD7005BC1EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		126004A41F25BCD7005BC1EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		126004A61F25BCD7005BC1EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8870EE26C180FD5169B26A93 /* Pods-TaiwanRockClimbing.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Q7N8D3YCYC;
+				INFOPLIST_FILE = TaiwanRockClimbing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.TaiwanRockClimbing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		126004A71F25BCD7005BC1EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 203032E6FB78566A81B90705 /* Pods-TaiwanRockClimbing.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Q7N8D3YCYC;
+				INFOPLIST_FILE = TaiwanRockClimbing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.TaiwanRockClimbing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1260048B1F25BCD7005BC1EF /* Build configuration list for PBXProject "TaiwanRockClimbing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				126004A31F25BCD7005BC1EF /* Debug */,
+				126004A41F25BCD7005BC1EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		126004A51F25BCD7005BC1EF /* Build configuration list for PBXNativeTarget "TaiwanRockClimbing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				126004A61F25BCD7005BC1EF /* Debug */,
+				126004A71F25BCD7005BC1EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1260049A1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1260049B1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodel */,
+			);
+			currentVersion = 1260049B1F25BCD7005BC1EF /* TaiwanRockClimbing.xcdatamodel */;
+			path = TaiwanRockClimbing.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 126004881F25BCD7005BC1EF /* Project object */;
+}
