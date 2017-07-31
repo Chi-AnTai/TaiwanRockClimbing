@@ -17,7 +17,7 @@ import AVKit
 
 class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     let imagePickerController = UIImagePickerController()
-    var gym = "123"
+    var gym = ""
     var difficulty = "wer"
     
 

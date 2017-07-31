@@ -112,7 +112,7 @@
             </objects>
             <point key="canvasLocation" x="799.20000000000005" y="72.413793103448285"/>
         </scene>
-        <!--Difficulty View Controller-->
+        <!--Title-->
         <scene sceneID="cwD-qf-1cf">
             <objects>
                 <viewController storyboardIdentifier="DifficultyViewController" id="jOQ-M6-aqa" customClass="DifficultyViewController" customModule="TaiwanRockClimbing" sceneMemberID="viewController">
@@ -135,15 +135,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-9k-mjg">
-                                                    <rect key="frame" x="24" y="19" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLa-Mp-mok">
+                                                    <rect key="frame" x="301" y="19" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLa-Mp-mok">
-                                                    <rect key="frame" x="301" y="19" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-9k-mjg">
+                                                    <rect key="frame" x="61" y="8" width="120" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -178,6 +178,9 @@
                                     <segment title="V4-V5"/>
                                     <segment title="V6-V7+"/>
                                 </segments>
+                                <connections>
+                                    <action selector="difficultyAction:" destination="jOQ-M6-aqa" eventType="valueChanged" id="YVA-pZ-8A9"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,15 +194,26 @@
                             <constraint firstAttribute="trailing" secondItem="Bjv-Dw-aS6" secondAttribute="trailing" id="Yvc-t3-c0g"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="8ED-eE-s7a">
+                        <barButtonItem key="rightBarButtonItem" title="新增路線" id="6q6-II-ROr">
+                            <connections>
+                                <segue destination="QCV-o6-wga" kind="show" id="Qdd-Zo-c4G"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="difficultySegment" destination="0lY-44-Gwb" id="TrQ-72-Tg6"/>
+                        <outlet property="difficultyTableView" destination="Nuj-AV-Ei4" id="yeu-ay-vGo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGu-2Z-fsx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1680.8" y="72.413793103448285"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Route View Controller-->
         <scene sceneID="hTZ-9y-QjT">
             <objects>
-                <viewController id="QCV-o6-wga" sceneMemberID="viewController">
+                <viewController id="QCV-o6-wga" customClass="AddRouteViewController" customModule="TaiwanRockClimbing" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iRm-1X-nxU"/>
                         <viewControllerLayoutGuide type="bottom" id="GZF-Oo-bcH"/>
@@ -207,12 +221,80 @@
                     <view key="view" contentMode="scaleToFill" id="yH3-S9-VLz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="難度" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u1m-OP-biQ">
+                                <rect key="frame" x="137.5" y="154" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="mS0-xP-k2N"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="顏色" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eNx-jh-nIm">
+                                <rect key="frame" x="137.5" y="204" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="5tN-aW-CAg"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jk1-Bn-IuC">
+                                <rect key="frame" x="62.5" y="304" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="bZt-zC-x9W"/>
+                                    <constraint firstAttribute="width" constant="250" id="d6i-JK-JZc"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDB-Ke-Fui">
+                                <rect key="frame" x="72" y="314" width="230" height="229"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="拍攝照片"/>
+                                <connections>
+                                    <action selector="takePhotoAction:" destination="QCV-o6-wga" eventType="touchUpInside" id="t0a-jp-lDd"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="岩點數" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Oj-xm-eOf">
+                                <rect key="frame" x="137.5" y="254" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="LAY-Ew-xIf"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="區域" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="auQ-3U-S6P">
+                                <rect key="frame" x="137.5" y="104" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="FbJ-5M-CX7"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eNx-jh-nIm" firstAttribute="top" secondItem="u1m-OP-biQ" secondAttribute="bottom" constant="20" id="AJB-jN-Cgg"/>
+                            <constraint firstItem="auQ-3U-S6P" firstAttribute="top" secondItem="iRm-1X-nxU" secondAttribute="bottom" constant="40" id="CQu-ZZ-wd8"/>
+                            <constraint firstItem="eNx-jh-nIm" firstAttribute="centerX" secondItem="yH3-S9-VLz" secondAttribute="centerX" id="NFO-7C-dEc"/>
+                            <constraint firstItem="4Oj-xm-eOf" firstAttribute="top" secondItem="eNx-jh-nIm" secondAttribute="bottom" constant="20" id="NeS-3F-RSR"/>
+                            <constraint firstItem="Jk1-Bn-IuC" firstAttribute="centerX" secondItem="yH3-S9-VLz" secondAttribute="centerX" id="NsD-I8-5La"/>
+                            <constraint firstItem="u1m-OP-biQ" firstAttribute="centerX" secondItem="yH3-S9-VLz" secondAttribute="centerX" id="ar1-Ij-md6"/>
+                            <constraint firstItem="4Oj-xm-eOf" firstAttribute="centerX" secondItem="yH3-S9-VLz" secondAttribute="centerX" id="blh-Ng-ngu"/>
+                            <constraint firstItem="u1m-OP-biQ" firstAttribute="top" secondItem="auQ-3U-S6P" secondAttribute="bottom" constant="20" id="cOQ-a8-lYl"/>
+                            <constraint firstItem="Jk1-Bn-IuC" firstAttribute="top" secondItem="4Oj-xm-eOf" secondAttribute="bottom" constant="20" id="ucX-y8-LmL"/>
+                            <constraint firstItem="auQ-3U-S6P" firstAttribute="centerX" secondItem="yH3-S9-VLz" secondAttribute="centerX" id="wbK-PE-92J"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="Jk1-Bn-IuC" id="cke-Vh-K0Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wm6-gG-lQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2486" y="72"/>
+            <point key="canvasLocation" x="2485.5999999999999" y="71.514242878560722"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qoJ-tk-Nm4">
