@@ -33,7 +33,12 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
     @IBOutlet weak var difficultySegment: UISegmentedControl!
     
     @IBAction func difficultyAction(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex
+        case 0: 
+        case
     }
+    
+    
     
     
     let difficultyLevel: [String] = ["V0-V1","V2-V3","V4-V5","V6 Up"]
@@ -65,6 +70,14 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+            if let targetViewController = segue.destination as? AddRouteViewController {
+                targetViewController.gym = self.gym
+                
+                
+            }
+        
+        
       
         
         

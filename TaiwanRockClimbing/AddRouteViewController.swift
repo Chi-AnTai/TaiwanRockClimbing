@@ -10,10 +10,52 @@ import UIKit
 import Firebase
 import MobileCoreServices
 
-class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+
+class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     let imagePickerController = UIImagePickerController()
+    var difficultyPicker = UIPickerView()
+    var difficultyOption = ["V0","V1","V2","V3","V4","V5","V6","V7"]
+    var gym = ""
+    @IBOutlet weak var takePhotoButton: UIButton!
+    
+    @IBOutlet weak var areaTextField: UITextField!
+    
+    @IBOutlet weak var difficultyTextField: UITextField!
+    
+    @IBOutlet weak var colorTextField: UITextField!
+    
+    @IBOutlet weak var pointsTextField: UITextField!
+    
+    
+    @IBAction func uploadButton(_ sender: UIBarButtonItem) {
+        let storageRef = Storage.storage().reference()
+        let uuid = NSUUID.init()
+        if photoImageView.image != nil {
+        let imageData = UIImagePNGRepresentation(photoImageView.image!)
+        let uploadImage = storageRef.child("\(uuid).png").putData(imageData!, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+                
+            }
+            if let downloadUrl = metadata.downloadURL() {
+            print(downloadUrl)
+            let downloadUrlString = String(describing: downloadUrl)
+            print(downloadUrlString)
+            let databaseRef = Database.database().reference()
+            let difficultyPath = self.difficultyRoute(difficulty: self.difficultyTextField.text!)
+            let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString])
+            
+            }
+        }
+        }
+        
+    }
+    
+    
     
     @IBAction func takePhotoAction(_ sender: Any) {
+        
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
         imagePickerController.cameraCaptureMode = .photo
@@ -33,9 +75,28 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return difficultyOption.count
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        difficultyTextField.text = difficultyOption[row]
+        return
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return difficultyOption[row]
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        difficultyPicker.delegate = self
+        difficultyPicker.dataSource = self
+        difficultyTextField.inputView = difficultyPicker
 
         // Do any additional setup after loading the view.
     }
@@ -45,6 +106,19 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         // Dispose of any resources that can be recreated.
     }
     
+    func difficultyRoute(difficulty: String) -> String {
+        if difficulty == "V0" || difficulty == "V1" {
+        return "V0V1"
+        }
+        if difficulty == "V2" || difficulty == "V3" {
+            return "V2V3"
+        }
+        if difficulty == "V4" || difficulty == "V5" {
+            return "V4V5"
+        }
+        return "V6"
+
+    }
 
     /*
     // MARK: - Navigation
