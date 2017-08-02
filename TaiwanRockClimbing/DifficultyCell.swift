@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class DifficultyCell: UITableViewCell {
+    var imageURL: String?
+    var autoID: String?
 
     @IBOutlet weak var difficultyLabel: UILabel!
 
@@ -20,4 +22,11 @@ class DifficultyCell: UITableViewCell {
 class GymCell: UITableViewCell {
 
     @IBOutlet weak var gymTitleLabel: UILabel!
+}
+
+class RouteCell: UITableViewCell {
+
+    @IBOutlet weak var thunbnailImageView: UIImageView!
+    
+    @IBOutlet weak var playButton: UIButton!
 }

@@ -15,32 +15,44 @@ import AVKit
 
 
 
-class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     let imagePickerController = UIImagePickerController()
     var gym = ""
     var difficulty = "wer"
+    var rouleImageURL: String?
+    var autoID: String = "none"
+    var urls: [String] = []
+    var thunbnailImages: [UIImage] = []
     
+        
+    @IBOutlet weak var routeImageView: UIImageView!
+    
+    @IBOutlet weak var videoTableView: UITableView!
+
+    @IBAction func addVideo(_ sender: UIBarButtonItem) {
+        imagePickerController.sourceType = .camera
+        imagePickerController.delegate = self
+//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+        present(imagePickerController, animated: true, completion: nil)
+        
+        
+        
+    }
+    
+    // @IBOutlet weak var routeImageView: UIImageView!
 
     
     var movieData: Data?
-    @IBOutlet weak var thunbnailImageView: UIImageView!
+//    @IBOutlet weak var thunbnailImageView: UIImageView!
     
-    @IBOutlet weak var videoView: UIView!
+//    @IBOutlet weak var videoView: UIView!
     @IBAction func pickVideoAction(_ sender: Any) {
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
-
-        
-//        imagePickerController.sourceType = .savedPhotosAlbum
-//        imagePickerController.delegate = self
-//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
-//        
-//        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
-//        present(imagePickerController, animated: true, completion: nil)
-//
     }
     
     
@@ -58,7 +70,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             let uuid = NSUUID.init()
             //let riversRef = storageRef.child("\(uuid)")
         
-            let uploadTask = storageRef.child("\(uuid).mp4").putData(movieData!, metadata: nil) { (metadata, error) in
+            let uploadTask = storageRef.child(autoID).child("\(uuid).mp4").putData(movieData!, metadata: nil) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
@@ -71,16 +83,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 let asset = AVAsset(url: downloadURL!)
                 let imageGenerator = AVAssetImageGenerator(asset: asset)
                 if let realdownloadURL = downloadURL {
-                databaseRef.child("\(self.gym)Route").child(self.difficulty).childByAutoId().child("video").setValue("\(realdownloadURL)")
+                databaseRef.child("video").child(self.autoID).childByAutoId().setValue("\(realdownloadURL)")
                 }
-                
-                
-                do {
-                    print("making")
-                    let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
-                self.thunbnailImageView.image = UIImage.init(cgImage: thunbnailCGImage)
-                                    }
-                catch {}
             
                 
                 let avplayerController = AVPlayerViewController()
@@ -100,18 +104,123 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     @IBOutlet weak var pickVideo: UIButton!
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return thunbnailImages.count    }
     
     
     
-       
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "routeCell", for: indexPath) as! RouteCell
+        
+//        if let imageURL = URL(string: urls[indexPath.row]) {
+//        
+//        let asset = AVAsset(url: imageURL)
+//        let imageGenerator = AVAssetImageGenerator(asset: asset)
+//        
+//        do {
+//            print("making image")
+//            let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
+//            cell.thunbnailImageView.image = UIImage.init(cgImage: thunbnailCGImage)
+//        }
+//        catch {}
+//        }
+        cell.thunbnailImageView.image = thunbnailImages[indexPath.row]
+        cell.playButton.tag = indexPath.row
+        cell.playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+        
+                return cell
+    }
     
+    func playVideo(sender: UIButton) {
+    print(sender.tag)
+        let avplayerController = AVPlayerViewController()
         
         
+        if let playVideoURL = URL(string: urls[sender.tag]){
+        let player = AVPlayer(url: playVideoURL)
         
-                
+        
+        avplayerController.player = player
+            player.play()
+        self.showDetailViewController(avplayerController, sender: self)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(autoID)
+        if let url = self.rouleImageURL {
+        let downloadURL = URL(string: url)
+        let data = try? Data(contentsOf: downloadURL!)
+            routeImageView.image = UIImage(data: data!)
+        }
+        let databaseRef = Database.database().reference()
+        
+        
+        databaseRef.child("video").child(autoID).observe(.childAdded, with: { (snapshot) in
+            
+            if let requestData = snapshot.value as? String {
+                
+                    print("find data")
+                    self.urls.append(requestData)
+                DispatchQueue.global().async {
+                    if let imageURL = URL(string: self.urls[self.urls.count-1]) {
+                        
+                        let asset = AVAsset(url: imageURL)
+                        let imageGenerator = AVAssetImageGenerator(asset: asset)
+                        
+                        do {
+                            print("making image")
+                            let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
+                            self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage)
+                            )                     }
+                        catch {}
+                        DispatchQueue.main.async {
+                            self.videoTableView.reloadData()
+
+                        }
+                        
+                    }
+
+                }
+//                if let imageURL = URL(string: self.urls[self.urls.count-1]) {
+//                    
+//                    let asset = AVAsset(url: imageURL)
+//                    let imageGenerator = AVAssetImageGenerator(asset: asset)
+//                    
+//                    do {
+//                        print("making image")
+//                        let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
+//                        self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage)
+//)                     }
+//                    catch {}
+//                    self.videoTableView.reloadData()
+//                }
+//
+                
+                
+                
+                
+                
+                
+                self.videoTableView.reloadData()
+                
+            }})
+
+ //       if self.rouleImageURL != nil {
+ //           let routeURL = URL(string: self.rouleImageURL!)
+ //           if let data = try? Data(contentsOf: routeURL!) {
+ //     //  routeImageView.image = UIImage(data: data)
+        
+  //          }
+  //      }
         
         
         // Do any additional setup after loading the view, typically from a nib.

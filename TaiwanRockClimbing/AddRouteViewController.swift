@@ -15,7 +15,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     let imagePickerController = UIImagePickerController()
     var difficultyPicker = UIPickerView()
     var difficultyOption = ["V0","V1","V2","V3","V4","V5","V6","V7"]
-    var gym = ""
+    var gym = "STONE"
     @IBOutlet weak var takePhotoButton: UIButton!
     
     @IBOutlet weak var areaTextField: UITextField!
@@ -116,7 +116,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         if difficulty == "V4" || difficulty == "V5" {
             return "V4V5"
         }
-        return "V6"
+        return "V6V7"
 
     }
 
