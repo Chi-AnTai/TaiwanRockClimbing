@@ -97,6 +97,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         difficultyPicker.delegate = self
         difficultyPicker.dataSource = self
         difficultyTextField.inputView = difficultyPicker
+        
 
         // Do any additional setup after loading the view.
     }

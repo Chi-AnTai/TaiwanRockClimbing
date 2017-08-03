@@ -35,6 +35,9 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
     var isDownloadingFourth: Bool = false
     @IBOutlet weak var difficultyTableView: UITableView!
     
+    @IBOutlet weak var gymImageView: UIImageView!
+    
+    
     @IBOutlet weak var difficultySegment: UISegmentedControl!
     
     @IBAction func difficultyAction(_ sender: UISegmentedControl) {
@@ -178,6 +181,9 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         print(gym)
+        gymImageView.image = UIImage(named: "Civic Bouldergym")
+        //gymImageView.tintColor = UIColor.blue
+        
         let databaseRef = Database.database().reference()
 
         // Do any additional setup after loading the view.
