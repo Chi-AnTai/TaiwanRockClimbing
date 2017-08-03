@@ -56,9 +56,11 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func takePhotoAction(_ sender: Any) {
         
+        //imagePickerController.sourceType = .photoLibrary
         imagePickerController.sourceType = .camera
-        imagePickerController.delegate = self
         imagePickerController.cameraCaptureMode = .photo
+        imagePickerController.delegate = self
+        
         imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
 

@@ -126,17 +126,23 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.autoID = V2V3[indexPath.row].autoID
             cell.imageURL = V2V3[indexPath.row].image
             cell.difficultyLabel.text = V2V3[indexPath.row].difficulty
+            cell.areaColorLabel.text = "\(V2V3[indexPath.row].area)區: \(V2V3[indexPath.row].color)色"
+            cell.pointsLabel.text = "岩點數： \(V2V3[indexPath.row].points)"
             return cell        }
 
         if difficultySegment.selectedSegmentIndex == 2 {
             cell.autoID = V4V5[indexPath.row].autoID
             cell.imageURL = V4V5[indexPath.row].image
             cell.difficultyLabel.text = V4V5[indexPath.row].difficulty
+            cell.areaColorLabel.text = "\(V4V5[indexPath.row].area)區: \(V4V5[indexPath.row].color)色"
+            cell.pointsLabel.text = "岩點數： \(V4V5[indexPath.row].points)"
             return cell        }
         if difficultySegment.selectedSegmentIndex == 3 {
             cell.autoID = V6V7[indexPath.row].autoID
             cell.imageURL = V6V7[indexPath.row].image
             cell.difficultyLabel.text = V6V7[indexPath.row].difficulty
+            cell.areaColorLabel.text = "\(V6V7[indexPath.row].area)區: \(V6V7[indexPath.row].color)色"
+            cell.pointsLabel.text = "岩點數： \(V6V7[indexPath.row].points)"
             return cell        }
         
 
@@ -145,6 +151,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
         cell.imageURL = V0V1[indexPath.row].image
         cell.autoID = V0V1[indexPath.row].autoID
         cell.difficultyLabel.text = V0V1[indexPath.row].difficulty
+        cell.areaColorLabel.text = "\(V0V1[indexPath.row].area)區: \(V0V1[indexPath.row].color)色"
+        cell.pointsLabel.text = "岩點數： \(V0V1[indexPath.row].points)"
         return cell
         
     }
@@ -181,8 +189,9 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         print(gym)
-        gymImageView.image = UIImage(named: "Civic Bouldergym")
-        //gymImageView.tintColor = UIColor.blue
+        //gymImageView.image = UIImage(named: "Civic Bouldergym")
+        gymImageView.tintColor = UIColor(colorLiteralRed: 128/255, green: 128/255, blue: 129.0/255, alpha: 0)
+        
         
         let databaseRef = Database.database().reference()
 

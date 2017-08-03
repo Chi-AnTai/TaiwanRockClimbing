@@ -16,6 +16,11 @@ class DifficultyCell: UITableViewCell {
     @IBOutlet weak var difficultyLabel: UILabel!
 
     @IBOutlet weak var numberOfRoute: UILabel!
+
+    @IBOutlet weak var pointsLabel: UILabel!
+
+    @IBOutlet weak var areaColorLabel: UILabel!
+
 }
 
 

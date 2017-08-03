@@ -23,6 +23,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     var autoID: String = "none"
     var urls: [String] = []
     var thunbnailImages: [UIImage] = []
+    var imageDic: [String:UIImage] = [:]
+    
     
         
     @IBOutlet weak var routeImageView: UIImageView!
@@ -57,6 +59,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         let videoNSURL = info[UIImagePickerControllerMediaURL] as? NSURL
         //print("videoURL:\(String(describing: videoURL))")
         self.dismiss(animated: true, completion: nil)
@@ -87,15 +90,15 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 }
             
                 
-                let avplayerController = AVPlayerViewController()
-                
-                
-                
-                let player = AVPlayer(url: downloadURL!)
-                
-              
-                avplayerController.player = player
-                self.showDetailViewController(avplayerController, sender: self)
+//                let avplayerController = AVPlayerViewController()
+//                
+//                
+//                
+//                let player = AVPlayer(url: downloadURL!)
+//                
+//              
+//                avplayerController.player = player
+//                self.showDetailViewController(avplayerController, sender: self)
             }
         }
         
@@ -124,7 +127,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
 //        }
 //        catch {}
 //        }
-        cell.thunbnailImageView.image = thunbnailImages[indexPath.row]
+        //cell.thunbnailImageView.image = thunbnailImages[indexPath.row]
+        cell.thunbnailImageView.image = imageDic[urls[indexPath.row]]
         cell.playButton.tag = indexPath.row
         cell.playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
         
@@ -156,11 +160,25 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         print(autoID)
-        if let url = self.rouleImageURL {
-        let downloadURL = URL(string: url)
-        let data = try? Data(contentsOf: downloadURL!)
-            routeImageView.image = UIImage(data: data!)
+        
+        DispatchQueue.global().async {
+            if let url = self.rouleImageURL {
+                let downloadURL = URL(string: url)
+                let data = try? Data(contentsOf: downloadURL!)
+                DispatchQueue.main.async {
+                    self.routeImageView.image = UIImage(data: data!)
+                }
+                
+            }
+
         }
+//        if let url = self.rouleImageURL {
+//        let downloadURL = URL(string: url)
+//        let data = try? Data(contentsOf: downloadURL!)
+//            routeImageView.image = UIImage(data: data!)
+//        }
+        
+        
         let databaseRef = Database.database().reference()
         
         
@@ -171,7 +189,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                     print("find data")
                     self.urls.append(requestData)
                 DispatchQueue.global().async {
-                    if let imageURL = URL(string: self.urls[self.urls.count-1]) {
+                    print(self.thunbnailImages.count)
+                    if let imageURL = URL(string: requestData) {
                         
                         let asset = AVAsset(url: imageURL)
                         let imageGenerator = AVAssetImageGenerator(asset: asset)
@@ -179,6 +198,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                         do {
                             print("making image")
                             let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
+                            
+                            let thunbImage = UIImage.init(cgImage: thunbnailCGImage)
+                            self.imageDic[requestData] = thunbImage
                             self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage)
                             )                     }
                         catch {}
