@@ -21,7 +21,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="160" sectionHeaderHeight="40" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="9ch-3E-Y73">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="xwV-hy-x4s">
+                                <rect key="frame" x="0.0" y="-0.5" width="375" height="667"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="160" sectionHeaderHeight="40" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="9ch-3E-Y73">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="67K-pC-inB">
@@ -36,7 +39,7 @@
                                     <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="routeCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="routeCell" id="2Lc-4e-VTe" customClass="RouteCell" customModule="TaiwanRockClimbing">
+                                    <tableViewCell clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" restorationIdentifier="routeCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="routeCell" id="2Lc-4e-VTe" customClass="RouteCell" customModule="TaiwanRockClimbing">
                                         <rect key="frame" x="0.0" y="290" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Lc-4e-VTe" id="wcv-Vo-dGw">
@@ -44,17 +47,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uBY-kp-LIX">
-                                                    <rect key="frame" x="46" y="23" width="285" height="128"/>
+                                                    <rect key="frame" x="60" y="23" width="259" height="105"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EF-iy-Ztk">
-                                                    <rect key="frame" x="46" y="23" width="285" height="128"/>
+                                                    <rect key="frame" x="46" y="23" width="285" height="111"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="play"/>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.71299913194444442" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="playButton" destination="2EF-iy-Ztk" id="XDt-Sy-dPt"/>
                                             <outlet property="thunbnailImageView" destination="uBY-kp-LIX" id="lel-e7-r8X"/>
@@ -71,7 +73,11 @@
                         <constraints>
                             <constraint firstItem="9ch-3E-Y73" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Bxu-hB-YHw"/>
                             <constraint firstItem="9ch-3E-Y73" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Lwe-O4-utK"/>
+                            <constraint firstItem="xwV-hy-x4s" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="Oui-hU-kcg"/>
+                            <constraint firstItem="xwV-hy-x4s" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="dLx-uS-oUM"/>
                             <constraint firstAttribute="trailing" secondItem="9ch-3E-Y73" secondAttribute="trailing" id="dyf-7N-hrL"/>
+                            <constraint firstItem="xwV-hy-x4s" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jtu-vf-5fg"/>
+                            <constraint firstItem="xwV-hy-x4s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="roS-AT-2tc"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9ch-3E-Y73" secondAttribute="bottom" id="wrI-0a-z0o"/>
                         </constraints>
                     </view>
@@ -103,7 +109,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-py-19H">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="d1n-GM-rEP">
+                                <rect key="frame" x="0.0" y="-0.5" width="375" height="667"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-py-19H">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -139,8 +148,12 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="hYc-py-19H" secondAttribute="trailing" id="3i9-X7-uvQ"/>
                             <constraint firstItem="H9A-We-ctU" firstAttribute="top" secondItem="hYc-py-19H" secondAttribute="bottom" id="BlE-pQ-kWm"/>
+                            <constraint firstItem="d1n-GM-rEP" firstAttribute="centerX" secondItem="eRF-Em-pJd" secondAttribute="centerX" id="EHj-T1-Cgv"/>
+                            <constraint firstItem="d1n-GM-rEP" firstAttribute="height" secondItem="eRF-Em-pJd" secondAttribute="height" id="I02-8Q-yC4"/>
+                            <constraint firstItem="d1n-GM-rEP" firstAttribute="width" secondItem="eRF-Em-pJd" secondAttribute="width" id="IVb-6h-wnf"/>
                             <constraint firstItem="hYc-py-19H" firstAttribute="leading" secondItem="eRF-Em-pJd" secondAttribute="leading" id="No3-U3-2sR"/>
                             <constraint firstItem="hYc-py-19H" firstAttribute="top" secondItem="Hcu-5o-Mf3" secondAttribute="bottom" id="ZB4-vE-RY0"/>
+                            <constraint firstItem="d1n-GM-rEP" firstAttribute="centerY" secondItem="eRF-Em-pJd" secondAttribute="centerY" id="zCI-wy-Qte"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Dqb-X6-yIG"/>
@@ -164,7 +177,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nuj-AV-Ei4">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="hXU-IK-vz8">
+                                <rect key="frame" x="0.0" y="-0.5" width="375" height="667"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nuj-AV-Ei4">
                                 <rect key="frame" x="0.0" y="342" width="375" height="325"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -229,6 +245,7 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0lY-44-Gwb">
                                 <rect key="frame" x="0.0" y="314" width="375" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
                                     <segment title="V0-V1"/>
                                     <segment title="V2-V3"/>
@@ -244,11 +261,15 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Nuj-AV-Ei4" secondAttribute="trailing" id="4kH-Gj-SGf"/>
                             <constraint firstItem="Nuj-AV-Ei4" firstAttribute="top" secondItem="pJi-XK-hDY" secondAttribute="bottom" constant="278" id="KwO-7x-zum"/>
+                            <constraint firstItem="hXU-IK-vz8" firstAttribute="width" secondItem="GHL-pq-hp8" secondAttribute="width" id="Lyv-4n-kEB"/>
                             <constraint firstItem="Nuj-AV-Ei4" firstAttribute="leading" secondItem="GHL-pq-hp8" secondAttribute="leading" id="Nc5-Z6-HDk"/>
                             <constraint firstItem="lq6-YK-rqk" firstAttribute="top" secondItem="Nuj-AV-Ei4" secondAttribute="bottom" id="Soa-ym-ULP"/>
+                            <constraint firstItem="hXU-IK-vz8" firstAttribute="height" secondItem="GHL-pq-hp8" secondAttribute="height" id="T9F-hu-8Nq"/>
                             <constraint firstItem="Bjv-Dw-aS6" firstAttribute="leading" secondItem="GHL-pq-hp8" secondAttribute="leading" id="UdX-rt-tFo"/>
                             <constraint firstItem="Bjv-Dw-aS6" firstAttribute="top" secondItem="pJi-XK-hDY" secondAttribute="bottom" id="VxL-KH-NIO"/>
                             <constraint firstAttribute="trailing" secondItem="Bjv-Dw-aS6" secondAttribute="trailing" id="Yvc-t3-c0g"/>
+                            <constraint firstItem="hXU-IK-vz8" firstAttribute="centerY" secondItem="GHL-pq-hp8" secondAttribute="centerY" id="khu-SV-gvE"/>
+                            <constraint firstItem="hXU-IK-vz8" firstAttribute="centerX" secondItem="GHL-pq-hp8" secondAttribute="centerX" id="vjk-u6-1Na"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="路線列表" id="8ED-eE-s7a">
@@ -268,10 +289,10 @@
             </objects>
             <point key="canvasLocation" x="1680.8" y="72.413793103448285"/>
         </scene>
-        <!--View Controller-->
+        <!--Landing View Controller-->
         <scene sceneID="1aU-sW-tgO">
             <objects>
-                <viewController id="q7u-If-iSp" sceneMemberID="viewController">
+                <viewController id="q7u-If-iSp" customClass="LandingViewController" customModule="TaiwanRockClimbing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mWW-Bh-0LW"/>
                         <viewControllerLayoutGuide type="bottom" id="bem-Gb-ZhE"/>
@@ -436,9 +457,9 @@
         <!--Navigation Controller-->
         <scene sceneID="qoJ-tk-Nm4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QJZ-Pi-F4B" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="QJZ-Pi-F4B" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="n4i-HJ-zVO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n4i-HJ-zVO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
