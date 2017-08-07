@@ -86,7 +86,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 let asset = AVAsset(url: downloadURL!)
                 let imageGenerator = AVAssetImageGenerator(asset: asset)
                 if let realdownloadURL = downloadURL {
-                databaseRef.child("video").child(self.autoID).childByAutoId().setValue("\(realdownloadURL)")
+                databaseRef.child("video").child(self.autoID).child("\(uuid)").setValue("\(realdownloadURL)")
                 }
             
                 

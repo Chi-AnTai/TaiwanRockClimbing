@@ -200,6 +200,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             self.isDownloadingFirst = true
             if let requestData = snapshot.value as? [String: String] {
                 self.V0V1.append(routeInfo(area: requestData["area"]!, color: requestData["color"]!, difficulty: requestData["difficulty"]!, points: requestData["points"]!, image: requestData["imageURL"]!, autoID: snapshot.key))
+                
+                print(snapshot.key)
                 self.difficultyTableView.reloadData()
 
             }
@@ -229,6 +231,33 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
         if editingStyle == .delete {
             print("tring to delete")
             // remove the item from the data model
+            if difficultySegment.selectedSegmentIndex == 1 {
+//                let databaseRef = Database.database().reference()
+//                let autoID = self.V2V3[indexPath.row].autoID
+//                print(autoID)
+//                self.V2V3.remove(at: indexPath.row)
+//                databaseRef.child("\(gym)Route").child("V2V3").child(autoID).removeValue()
+//                
+                let storage = Storage.storage()
+                let storageRef = storage.reference()
+                let desertRef = storageRef.child("-KqN4AigQiMGeZ-MiKK8")
+                // Delete the file
+                desertRef.delete { error in
+                    if let error = error {
+                        print("\(error)")
+                        // Uh-oh, an error occurred!
+                    } else {
+                        print("success")
+                        // File deleted successfully
+                    }
+                }
+                self.difficultyTableView.reloadData()
+
+            }
+                
+            
+            
+            
             
             
             // delete the table view row

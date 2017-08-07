@@ -18,6 +18,7 @@
 		126004AD1F29CA15005BC1EF /* DifficultyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126004AC1F29CA15005BC1EF /* DifficultyCell.swift */; };
 		126004AF1F29DA12005BC1EF /* GymTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126004AE1F29DA12005BC1EF /* GymTableViewController.swift */; };
 		12B511E71F330C110090EDC2 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B511E61F330C110090EDC2 /* LandingViewController.swift */; };
+		12B512641F3858140090EDC2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B512631F3858140090EDC2 /* LoginViewController.swift */; };
 		12E791331F2EE00300395864 /* AddRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E791321F2EE00300395864 /* AddRouteViewController.swift */; };
 		BC76342C0F7760F8C1B7CDBC /* Pods_TaiwanRockClimbing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8529CA72989E54E047CFC886 /* Pods_TaiwanRockClimbing.framework */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		126004AC1F29CA15005BC1EF /* DifficultyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifficultyCell.swift; sourceTree = "<group>"; };
 		126004AE1F29DA12005BC1EF /* GymTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymTableViewController.swift; sourceTree = "<group>"; };
 		12B511E61F330C110090EDC2 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		12B512631F3858140090EDC2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		12E791321F2EE00300395864 /* AddRouteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRouteViewController.swift; sourceTree = "<group>"; };
 		203032E6FB78566A81B90705 /* Pods-TaiwanRockClimbing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanRockClimbing.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaiwanRockClimbing/Pods-TaiwanRockClimbing.release.xcconfig"; sourceTree = "<group>"; };
 		8529CA72989E54E047CFC886 /* Pods_TaiwanRockClimbing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaiwanRockClimbing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				126004931F25BCD7005BC1EF /* AppDelegate.swift */,
+				12B512631F3858140090EDC2 /* LoginViewController.swift */,
 				126004951F25BCD7005BC1EF /* ViewController.swift */,
 				126004971F25BCD7005BC1EF /* Main.storyboard */,
 				12B511E61F330C110090EDC2 /* LandingViewController.swift */,
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12B512641F3858140090EDC2 /* LoginViewController.swift in Sources */,
 				126004961F25BCD7005BC1EF /* ViewController.swift in Sources */,
 				126004AF1F29DA12005BC1EF /* GymTableViewController.swift in Sources */,
 				12B511E71F330C110090EDC2 /* LandingViewController.swift in Sources */,
