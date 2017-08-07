@@ -30,6 +30,21 @@ extension UIImage {
     func jpeg(_ quality: JPEGQuality) -> Data? {
         return UIImageJPEGRepresentation(self, quality.rawValue)
     }
+    
+    func resizeImageWith(newSize: CGSize) -> UIImage {
+        
+        let horizontalRatio = newSize.width / size.width
+        let verticalRatio = newSize.height / size.height
+        
+        let ratio = max(horizontalRatio, verticalRatio)
+        let newSize = CGSize(width: size.width * ratio, height: size.height * ratio)
+        UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
+        draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+
 }
 
 
@@ -53,7 +68,8 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         let storageRef = Storage.storage().reference()
         let uuid = NSUUID.init()
         if photoImageView.image != nil {
-        let imageData = UIImageJPEGRepresentation(photoImageView.image!, 0.0)
+        let resizedPhoto = photoImageView.image?.resizeImageWith(newSize: CGSize(width: 120.0, height: 120.0))
+        let imageData = UIImageJPEGRepresentation(resizedPhoto!, 1)
             //UIImageJPEGRepresentation(photoImageView.image!, 0.3)
             //UIImagePNGRepresentation(photoImageView.image!)
             
@@ -150,7 +166,8 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         return "V6V7"
 
     }
-
+    
+    
     /*
     // MARK: - Navigation
 

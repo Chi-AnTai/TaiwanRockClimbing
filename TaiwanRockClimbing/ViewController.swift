@@ -34,7 +34,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func addVideo(_ sender: UIBarButtonItem) {
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
-//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
         
@@ -130,6 +130,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         //cell.thunbnailImageView.image = thunbnailImages[indexPath.row]
         cell.thunbnailImageView.image = imageDic[urls[indexPath.row]]
         cell.playButton.tag = indexPath.row
+        cell.playButton.tintColor = UIColor.white
         cell.playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
         
                 return cell
@@ -252,6 +253,22 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            print("tring to delete")
+            // remove the item from the data model
+            
+            
+            // delete the table view row
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if editingStyle == .insert {
+            // Not used in our example, but if you were adding a new row, this is where you would do it.
+            print("tring to insert")
+        }
+    }
+
 
 
 }

@@ -20,6 +20,8 @@ class DifficultyCell: UITableViewCell {
     @IBOutlet weak var pointsLabel: UILabel!
 
     @IBOutlet weak var areaColorLabel: UILabel!
+    
+    var key:String?
 
 }
 
@@ -34,4 +36,6 @@ class RouteCell: UITableViewCell {
     @IBOutlet weak var thunbnailImageView: UIImageView!
     
     @IBOutlet weak var playButton: UIButton!
+    
+    var key: String?
 }

@@ -224,6 +224,22 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            print("tring to delete")
+            // remove the item from the data model
+            
+            
+            // delete the table view row
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if editingStyle == .insert {
+            // Not used in our example, but if you were adding a new row, this is where you would do it.
+            print("tring to insert")
+        }
+    }
+    
 
     /*
     // MARK: - Navigation
