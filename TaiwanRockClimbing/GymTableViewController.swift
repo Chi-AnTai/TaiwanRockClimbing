@@ -13,6 +13,8 @@ import Firebase
 class GymTableViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var gymTableView: UITableView!
     var gymTitle: [String] = []
+    var currentUser: CurrentUser?
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,6 +30,7 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
         if let cell = sender as? GymCell {
             if let targetViewController = segue.destination as? DifficultyViewController {
                 targetViewController.gym = cell.gymTitleLabel.text!
+                targetViewController.currentUser = self.currentUser
                 
                 
             }
@@ -45,12 +48,23 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         let databaseRef = Database.database().reference()
+        if let userID = Auth.auth().currentUser?.uid {
+        databaseRef.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let requestData = snapshot.value as? [String: String] {
+                self.currentUser = CurrentUser(name: requestData["name"]!, email: requestData["email"]!, password: requestData["password"]!, uid: snapshot.key)
+                print(self.currentUser!.name)
+            
+            }
+            
+        })
+        }
+        
         databaseRef.child("gym").observe(.childAdded, with: { (snapshot) in
-            print(snapshot)
+            //print(snapshot)
             if let requestData = snapshot.value as? [String:String] {
                 self.gymTitle.append(requestData["title"]!)
                 
-            print(requestData["title"])
+            //print(requestData["title"])
                 self.gymTableView.reloadData()
             }
 //            if let requestData = snapshot.value as? [String:String] {

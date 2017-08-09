@@ -27,6 +27,7 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
     var V2V3: [routeInfo] = []
     var V4V5: [routeInfo] = []
     var V6V7: [routeInfo] = []
+    var currentUser: CurrentUser?
     
     
     var isDownloadingFirst: Bool = false
@@ -163,6 +164,7 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
         
             if let targetViewController = segue.destination as? AddRouteViewController {
                 targetViewController.gym = self.gym
+                targetViewController.currentUser = self.currentUser
                 
                 
                 
@@ -176,6 +178,7 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
         if let cell = sender as? DifficultyCell {
             if let targetViewController = segue.destination as? ViewController {
                 targetViewController.gym = self.gym
+                targetViewController.currentUser = self.currentUser
                 targetViewController.rouleImageURL = cell.imageURL
                 if let passID = cell.autoID  {
                 targetViewController.autoID = passID
@@ -226,49 +229,71 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            print("tring to delete")
-            // remove the item from the data model
-            if difficultySegment.selectedSegmentIndex == 1 {
-//                let databaseRef = Database.database().reference()
-//                let autoID = self.V2V3[indexPath.row].autoID
-//                print(autoID)
-//                self.V2V3.remove(at: indexPath.row)
-//                databaseRef.child("\(gym)Route").child("V2V3").child(autoID).removeValue()
-//                
-                let storage = Storage.storage()
-                let storageRef = storage.reference()
-                let desertRef = storageRef.child("-KqN4AigQiMGeZ-MiKK8")
-                // Delete the file
-                desertRef.delete { error in
-                    if let error = error {
-                        print("\(error)")
-                        // Uh-oh, an error occurred!
-                    } else {
-                        print("success")
-                        // File deleted successfully
-                    }
-                }
-                self.difficultyTableView.reloadData()
-
-            }
-                
-            
-            
-            
-            
-            
-            // delete the table view row
-            //tableView.deleteRows(at: [indexPath], with: .fade)
-            
-        } else if editingStyle == .insert {
-            // Not used in our example, but if you were adding a new row, this is where you would do it.
-            print("tring to insert")
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        
+//        if editingStyle == .delete {
+//            deleteSomething()
     
+            
+//            print("tring to delete")
+//            // remove the item from the data model
+//            if difficultySegment.selectedSegmentIndex == 1 {
+////                let databaseRef = Database.database().reference()
+////                let autoID = self.V2V3[indexPath.row].autoID
+////                print(autoID)
+////                self.V2V3.remove(at: indexPath.row)
+////                databaseRef.child("\(gym)Route").child("V2V3").child(autoID).removeValue()
+////                
+//                let storage = Storage.storage()
+//                let storageRef = storage.reference()
+//                let desertRef = storageRef.child("-KqN4AigQiMGeZ-MiKK8")
+//                // Delete the file
+//                desertRef.delete { error in
+//                    if let error = error {
+//                        print("\(error)")
+//                        // Uh-oh, an error occurred!
+//                    } else {
+//                        print("success")
+//                        // File deleted successfully
+//                    }
+//                }
+//                self.difficultyTableView.reloadData()
+//
+//            }
+//        } else if editingStyle == .insert {
+//            // Not used in our example, but if you were adding a new row, this is where you would do it.
+//            print("tring to insert")
+//        }
+//    }
+    func deleteSomething() {
+        // 建立一個提示框
+        let alertController = UIAlertController(
+            title: "刪除",
+            message: "刪除字樣會變紅色的",
+            preferredStyle: .alert)
+        
+        // 建立[取消]按鈕
+        
+        
+        
+        let cancelAction = UIAlertAction(
+            title: "取消",
+            style: .cancel,
+            handler: nil)
+        alertController.addAction(cancelAction)
+        
+        // 建立[刪除]按鈕
+        let okAction = UIAlertAction(title: "刪除", style: .destructive) { (UIAlertAction) in
+            print("deleting")
+        }
+        alertController.addAction(okAction)
+        
+        // 顯示提示框
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil)
+    }
 
     /*
     // MARK: - Navigation

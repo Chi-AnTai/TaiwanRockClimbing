@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AEDE19BB482CEF95DF68888C1C509927"
+               BlueprintIdentifier = "DAFD270B778234919BB2B1394CEA09B4"
                BuildableName = "Pods_TaiwanRockClimbing.framework"
                BlueprintName = "Pods-TaiwanRockClimbing"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AEDE19BB482CEF95DF68888C1C509927"
+            BlueprintIdentifier = "DAFD270B778234919BB2B1394CEA09B4"
             BuildableName = "Pods_TaiwanRockClimbing.framework"
             BlueprintName = "Pods-TaiwanRockClimbing"
             ReferencedContainer = "container:Pods.xcodeproj">
