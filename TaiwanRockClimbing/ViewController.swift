@@ -12,10 +12,11 @@ import MobileCoreServices
 import Firebase
 import AVFoundation
 import AVKit
+import NVActivityIndicatorView
 
 
 
-class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, NVActivityIndicatorViewable {
     let imagePickerController = UIImagePickerController()
     var gym = ""
     var difficulty = "wer"
@@ -24,6 +25,10 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     var urls: [String] = []
     var thunbnailImages: [UIImage] = []
     var imageDic: [String:UIImage] = [:]
+    var currentUser: CurrentUser?
+    var uploaderName: [String] = []
+    var uploaderEmail: [String] = []
+    var videoKey: [String] = []
     
     
         
@@ -42,13 +47,10 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
     }
     
-    // @IBOutlet weak var routeImageView: UIImageView!
 
     
     var movieData: Data?
-//    @IBOutlet weak var thunbnailImageView: UIImageView!
-    
-//    @IBOutlet weak var videoView: UIView!
+
     @IBAction func pickVideoAction(_ sender: Any) {
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
@@ -61,8 +63,10 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         let videoNSURL = info[UIImagePickerControllerMediaURL] as? NSURL
-        //print("videoURL:\(String(describing: videoURL))")
         self.dismiss(animated: true, completion: nil)
+        
+        
+        startAnimating(CGSize.init(width: 120, height: 120),message: "uploading")
         
         let videoURL = videoNSURL as URL!
         if let first = NSData(contentsOf: videoURL! ) as Data? {
@@ -71,9 +75,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             let storage = Storage.storage()
             let storageRef = storage.reference()
             let uuid = NSUUID.init()
-            //let riversRef = storageRef.child("\(uuid)")
-        
-            let uploadTask = storageRef.child(autoID).child("\(uuid).mp4").putData(movieData!, metadata: nil) { (metadata, error) in
+                        let uploadTask = storageRef.child(autoID).child("\(uuid).mp4").putData(movieData!, metadata: nil) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
@@ -82,23 +84,14 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 let databaseRef = Database.database().reference()
                 let downloadURL = metadata.downloadURL()
-                print(downloadURL)
+                
                 let asset = AVAsset(url: downloadURL!)
                 let imageGenerator = AVAssetImageGenerator(asset: asset)
                 if let realdownloadURL = downloadURL {
-                databaseRef.child("video").child(self.autoID).child("\(uuid)").setValue("\(realdownloadURL)")
+                databaseRef.child("video").child(self.autoID).child("\(uuid)").setValue(["url": "\(realdownloadURL)", "name": self.currentUser!.name, "email": self.currentUser!.email])
                 }
-            
-                
-//                let avplayerController = AVPlayerViewController()
-//                
-//                
-//                
-//                let player = AVPlayer(url: downloadURL!)
-//                
-//              
-//                avplayerController.player = player
-//                self.showDetailViewController(avplayerController, sender: self)
+                self.stopAnimating()
+
             }
         }
         
@@ -108,7 +101,10 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBOutlet weak var pickVideo: UIButton!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return thunbnailImages.count    }
+        //return thunbnailImages.count
+        return imageDic.count
+    
+    }
     
     
     
@@ -129,9 +125,16 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
 //        }
         //cell.thunbnailImageView.image = thunbnailImages[indexPath.row]
         cell.thunbnailImageView.image = imageDic[urls[indexPath.row]]
+        cell.thunbnailImageView.clipsToBounds = true
+        cell.thunbnailImageView.layer.cornerRadius = 8
         cell.playButton.tag = indexPath.row
         cell.playButton.tintColor = UIColor.white
         cell.playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+        cell.email = uploaderEmail[indexPath.row]
+        cell.name = uploaderName[indexPath.row]
+        cell.key = videoKey[indexPath.row]
+        cell.uploaderLabel.text = "Uploaded by \(uploaderName[indexPath.row])"
+        print("cellname=\(uploaderName[indexPath.row])")
         
                 return cell
     }
@@ -167,7 +170,13 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 let downloadURL = URL(string: url)
                 let data = try? Data(contentsOf: downloadURL!)
                 DispatchQueue.main.async {
+                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
                     self.routeImageView.image = UIImage(data: data!)
+                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+                    self.videoTableView.reloadData()
+                    
+                    
+                    
                 }
                 
             }
@@ -185,13 +194,21 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
         databaseRef.child("video").child(autoID).observe(.childAdded, with: { (snapshot) in
             
-            if let requestData = snapshot.value as? String {
+            if let requestData = snapshot.value as? [String:String] {
                 
-                    print("find data")
-                    self.urls.append(requestData)
+                print(snapshot.value)
+                print("here")
+                print(requestData["url"]!)
+                
+                if let name = requestData["name"] as? String, let email = requestData["email"] as? String {
+                    self.uploaderName.append(name)
+                    self.uploaderEmail.append(email)
+                    self.videoKey.append(snapshot.key)
+                }
+                    self.urls.append(requestData["url"]!)
                 DispatchQueue.global().async {
-                    print(self.thunbnailImages.count)
-                    if let imageURL = URL(string: requestData) {
+                    
+                    if let imageURL = URL(string: requestData["url"]!) {
                         
                         let asset = AVAsset(url: imageURL)
                         let imageGenerator = AVAssetImageGenerator(asset: asset)
@@ -201,9 +218,11 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                             let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
                             
                             let thunbImage = UIImage.init(cgImage: thunbnailCGImage)
-                            self.imageDic[requestData] = thunbImage
-                            self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage)
-                            )                     }
+                            self.imageDic[requestData["url"]!] = thunbImage
+                            //self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage))
+                            print(self.thunbnailImages.count)
+                            //self.videoTableView.reloadData()                     
+                        }
                         catch {}
                         DispatchQueue.main.async {
                             self.videoTableView.reloadData()
@@ -256,18 +275,103 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            print("tring to delete")
+            if currentUser!.email == uploaderEmail[indexPath.row] {
+                
+                print("tring to delete")
+                
+                
+                let alertController = UIAlertController(
+                    title: "刪除",
+                    message: "確定要刪除影片嗎？",
+                    preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(
+                    title: "取消",
+                    style: .cancel,
+                    handler: nil)
+                alertController.addAction(cancelAction)
+                
+                // 建立[刪除]按鈕
+                let okAction = UIAlertAction(title: "刪除", style: .destructive) { (UIAlertAction) in
+                    
+                    let databaseRef = Database.database().reference()
+                    databaseRef.child("video").child(self.autoID).child(self.videoKey[indexPath.row]).removeValue()
+                    let storageRef = Storage.storage().reference()
+                    storageRef.child(self.autoID).child("\(self.videoKey[indexPath.row]).mp4").delete(completion: { (error) in
+                        if let error = error {
+                            print("\(error)")
+                            // Uh-oh, an error occurred!
+                        } else {
+                            print("success")
+                           
+                            // File deleted successfully
+                        }
+                    })
+
+                }
+                alertController.addAction(okAction)
+                
+                // 顯示提示框
+                self.present(
+                    alertController,
+                    animated: true,
+                    completion: nil)
+
+                        }
+            else {
+                
+                let alertController = UIAlertController(title: "錯誤", message: "這不是你上傳的影片", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { (_) in
+                    return
+                })
+                
+                alertController.addAction(okAction)
+                self.present(
+                    alertController,
+                    animated: true,
+                    completion: nil)
+
+            print("not match")
+            }
             // remove the item from the data model
             
             
             // delete the table view row
             //tableView.deleteRows(at: [indexPath], with: .fade)
             
-        } else if editingStyle == .insert {
-            // Not used in our example, but if you were adding a new row, this is where you would do it.
-            print("tring to insert")
         }
     }
+    
+//    func deleteSomething() {
+//        // 建立一個提示框
+//        let alertController = UIAlertController(
+//            title: "刪除",
+//            message: "刪除字樣會變紅色的",
+//            preferredStyle: .alert)
+//        
+//        // 建立[取消]按鈕
+//        
+//        
+//        
+//        let cancelAction = UIAlertAction(
+//            title: "取消",
+//            style: .cancel,
+//            handler: nil)
+//        alertController.addAction(cancelAction)
+//        
+//        // 建立[刪除]按鈕
+//        let okAction = UIAlertAction(title: "刪除", style: .destructive) { (UIAlertAction) in
+//            print("deleting")
+//        }
+//        alertController.addAction(okAction)
+//        
+//        // 顯示提示框
+//        self.present(
+//            alertController,
+//            animated: true,
+//            completion: nil)
+//    }
+
 
 
 

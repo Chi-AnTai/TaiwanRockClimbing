@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import MobileCoreServices
+import NVActivityIndicatorView
 
 extension UIImage {
     enum JPEGQuality: CGFloat {
@@ -48,7 +49,8 @@ extension UIImage {
 }
 
 
-class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource,NVActivityIndicatorViewable {
+    var currentUser: CurrentUser?
     let imagePickerController = UIImagePickerController()
     var difficultyPicker = UIPickerView()
     var difficultyOption = ["V0","V1","V2","V3","V4","V5","V6","V7"]
@@ -65,6 +67,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
+        startAnimating(CGSize.init(width: 120, height: 120),message: "uploading")
         let storageRef = Storage.storage().reference()
         let uuid = NSUUID.init()
         if photoImageView.image != nil {
@@ -75,19 +78,23 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
             
         let uploadImage = storageRef.child("\(uuid).png").putData(imageData!, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else {
+                self.stopAnimating()
                 // Uh-oh, an error occurred!
                 return
                 
             }
+            print(metadata)
             if let downloadUrl = metadata.downloadURL() {
-            print(downloadUrl)
+            
             let downloadUrlString = String(describing: downloadUrl)
-            print(downloadUrlString)
+            
             let databaseRef = Database.database().reference()
             let difficultyPath = self.difficultyRoute(difficulty: self.difficultyTextField.text!)
-            let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString])
+            let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString, "imageUUID": "\(uuid)", "creator": self.currentUser!.email])
+                self.stopAnimating()
             
             }
+            self.stopAnimating()
         }
         }
         

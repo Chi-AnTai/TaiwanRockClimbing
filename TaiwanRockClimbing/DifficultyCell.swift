@@ -9,6 +9,14 @@
 import Foundation
 import UIKit
 
+struct CurrentUser {
+    var name: String
+    var email: String
+    var password: String
+    var uid: String
+
+}
+
 class DifficultyCell: UITableViewCell {
     var imageURL: String?
     var autoID: String?
@@ -36,6 +44,9 @@ class RouteCell: UITableViewCell {
     @IBOutlet weak var thunbnailImageView: UIImageView!
     
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var uploaderLabel: UILabel!
     
     var key: String?
+    var name: String?
+    var email: String?
 }
