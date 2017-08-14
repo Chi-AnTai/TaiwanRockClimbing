@@ -53,19 +53,12 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
                 self.V2V3.append(routeInfo(area: requestData["area"]!, color: requestData["color"]!, difficulty: requestData["difficulty"]!, points: requestData["points"]!, image: requestData["imageURL"]!, autoID: snapshot.key))
                 
                 self.difficultyTableView.reloadData()
-                
-                
             }
         }
             )
             }
        self.difficultyTableView.reloadData()
 
-        
-        
-        
-        
-        
         case 2: if isDownloadingThird == false {
             self.isDownloadingThird = true
             let databaseRef = Database.database().reference()
@@ -131,31 +124,32 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.pointsLabel.text = "岩點數： \(V2V3[indexPath.row].points)"
             return cell        }
 
-        if difficultySegment.selectedSegmentIndex == 2 {
+        else if difficultySegment.selectedSegmentIndex == 2 {
             cell.autoID = V4V5[indexPath.row].autoID
             cell.imageURL = V4V5[indexPath.row].image
             cell.difficultyLabel.text = V4V5[indexPath.row].difficulty
             cell.areaColorLabel.text = "\(V4V5[indexPath.row].area)區: \(V4V5[indexPath.row].color)色"
             cell.pointsLabel.text = "岩點數： \(V4V5[indexPath.row].points)"
             return cell        }
-        if difficultySegment.selectedSegmentIndex == 3 {
+        else if difficultySegment.selectedSegmentIndex == 3 {
             cell.autoID = V6V7[indexPath.row].autoID
             cell.imageURL = V6V7[indexPath.row].image
             cell.difficultyLabel.text = V6V7[indexPath.row].difficulty
             cell.areaColorLabel.text = "\(V6V7[indexPath.row].area)區: \(V6V7[indexPath.row].color)色"
             cell.pointsLabel.text = "岩點數： \(V6V7[indexPath.row].points)"
             return cell        }
-        
-
-        
-        
+        else {
         cell.imageURL = V0V1[indexPath.row].image
         cell.autoID = V0V1[indexPath.row].autoID
         cell.difficultyLabel.text = V0V1[indexPath.row].difficulty
         cell.areaColorLabel.text = "\(V0V1[indexPath.row].area)區: \(V0V1[indexPath.row].color)色"
         cell.pointsLabel.text = "岩點數： \(V0V1[indexPath.row].points)"
-        return cell
         
+        cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
+        cell.difficultyLabel.layer.masksToBounds = true
+        
+        return cell
+        }
     }
     
     
@@ -165,16 +159,7 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             if let targetViewController = segue.destination as? AddRouteViewController {
                 targetViewController.gym = self.gym
                 targetViewController.currentUser = self.currentUser
-                
-                
-                
             }
-        
-        
-      
-        
-        
-        
         if let cell = sender as? DifficultyCell {
             if let targetViewController = segue.destination as? ViewController {
                 targetViewController.gym = self.gym
@@ -229,6 +214,13 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+        self.difficultyTableView.reloadData()
+        }
+    
+    }
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 //        
 //        if editingStyle == .delete {
