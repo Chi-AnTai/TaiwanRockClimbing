@@ -115,7 +115,7 @@
             </objects>
             <point key="canvasLocation" x="741.60000000000002" y="-727.28635682158927"/>
         </scene>
-        <!--Gym Table View Controller-->
+        <!--場館列表-->
         <scene sceneID="pSw-jm-0dU">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="SPM-Ca-D9b" customClass="GymTableViewController" customModule="TaiwanRockClimbing" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="d1n-GM-rEP">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="d1n-GM-rEP">
                                 <rect key="frame" x="0.0" y="-0.5" width="375" height="667"/>
                             </imageView>
                             <tableView clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-py-19H">
@@ -141,10 +141,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhl-ws-oBh">
-                                                    <rect key="frame" x="0.0" y="17" width="375" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhl-ws-oBh">
+                                                    <rect key="frame" x="51" y="17" width="281" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -174,7 +174,7 @@
                             <constraint firstItem="d1n-GM-rEP" firstAttribute="centerY" secondItem="eRF-Em-pJd" secondAttribute="centerY" id="zCI-wy-Qte"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Dqb-X6-yIG"/>
+                    <navigationItem key="navigationItem" title="場館列表" id="Dqb-X6-yIG"/>
                     <connections>
                         <outlet property="gymTableView" destination="hYc-py-19H" id="5bm-oh-XlH"/>
                     </connections>
@@ -195,36 +195,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="hXU-IK-vz8">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="hXU-IK-vz8">
                                 <rect key="frame" x="0.0" y="-0.5" width="375" height="667"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nuj-AV-Ei4">
+                            <tableView clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nuj-AV-Ei4">
                                 <rect key="frame" x="0.0" y="342" width="375" height="325"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="difficultyCell" rowHeight="60" id="i7k-wD-Pty" customClass="DifficultyCell" customModule="TaiwanRockClimbing">
-                                        <rect key="frame" x="0.0" y="1" width="375" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="difficultyCell" rowHeight="65" id="i7k-wD-Pty" customClass="DifficultyCell" customModule="TaiwanRockClimbing">
+                                        <rect key="frame" x="0.0" y="1" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i7k-wD-Pty" id="JM6-Yd-I7s">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-9k-mjg">
-                                                    <rect key="frame" x="8" y="19" width="77" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nt4-KC-uMO">
-                                                    <rect key="frame" x="70" y="8" width="161" height="21"/>
+                                                    <rect key="frame" x="107" y="6" width="161" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnK-Kf-XO5">
-                                                    <rect key="frame" x="70" y="35" width="210" height="21"/>
+                                                    <rect key="frame" x="107" y="35" width="210" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -237,7 +230,22 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-9k-mjg">
+                                                    <rect key="frame" x="28" y="18" width="30" height="30"/>
+                                                    <color key="backgroundColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="W8i-vC-cew"/>
+                                                        <constraint firstAttribute="height" constant="30" id="ylm-xP-JtC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2ul-9k-mjg" firstAttribute="leading" secondItem="JM6-Yd-I7s" secondAttribute="leadingMargin" constant="20" id="a2u-dj-mQg"/>
+                                                <constraint firstItem="2ul-9k-mjg" firstAttribute="top" secondItem="JM6-Yd-I7s" secondAttribute="topMargin" constant="10" id="l7d-jy-hKT"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -270,6 +278,7 @@
                                     <segment title="V4-V5"/>
                                     <segment title="V6-V7+"/>
                                 </segments>
+                                <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="difficultyAction:" destination="jOQ-M6-aqa" eventType="valueChanged" id="YVA-pZ-8A9"/>
                                 </connections>
@@ -292,6 +301,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="路線列表" id="8ED-eE-s7a">
                         <barButtonItem key="rightBarButtonItem" title="新增路線" id="6q6-II-ROr">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="QCV-o6-wga" kind="show" id="Qdd-Zo-c4G"/>
                             </connections>
@@ -319,7 +329,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="0XZ-mC-2Oq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="0XZ-mC-2Oq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TaiwanRockClimbing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8p-JN-ZUx">
@@ -329,21 +339,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-3o-UrW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abcd@gmail.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBo-qY-PkB">
+                                <rect key="frame" x="83" y="370" width="208" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-3o-UrW">
                                 <rect key="frame" x="83" y="420" width="208" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4D-mv-uc4">
-                                <rect key="frame" x="164" y="543" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="registerButton:" destination="q7u-If-iSp" eventType="touchUpInside" id="fPr-Nc-OIt"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WOu-qC-P7h">
                                 <rect key="frame" x="83" y="323" width="208" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -363,13 +372,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abcd@gmail.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBo-qY-PkB">
-                                <rect key="frame" x="83" y="370" width="208" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4D-mv-uc4">
+                                <rect key="frame" x="164" y="521" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="20"/>
+                                <state key="normal" title="註冊">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerButton:" destination="q7u-If-iSp" eventType="touchUpInside" id="fPr-Nc-OIt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -381,6 +394,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="RBo-qY-PkB" id="TD2-s2-mG0"/>
+                        <outlet property="loginButton" destination="A4D-mv-uc4" id="sJf-wS-bbS"/>
                         <outlet property="loginSegmentControl" destination="WOu-qC-P7h" id="aRX-aE-4l8"/>
                         <outlet property="nameTextField" destination="Te1-qj-A87" id="d9q-Ac-vL5"/>
                         <outlet property="passwordTextField" destination="xX1-3o-UrW" id="4yI-PZ-A6T"/>
@@ -402,6 +416,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AeV-O6-0bE" customClass="EditImage" customModule="TaiwanRockClimbing">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.6705882353" green="0.70196078429999997" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ａ " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="auQ-3U-S6P">
                                 <rect key="frame" x="138" y="104" width="100" height="30"/>
                                 <constraints>
@@ -500,7 +519,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="新增路線" id="6EY-T2-3mz">
+                        <barButtonItem key="backBarButtonItem" title="放棄編輯" id="gzW-F2-Ca0"/>
                         <barButtonItem key="rightBarButtonItem" title="上傳路線" id="j4Q-MR-Ymf">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="uploadButton:" destination="QCV-o6-wga" id="viW-FW-4ww"/>
                             </connections>
@@ -510,14 +531,79 @@
                         <outlet property="areaTextField" destination="auQ-3U-S6P" id="DDg-EB-zzj"/>
                         <outlet property="colorTextField" destination="eNx-jh-nIm" id="ofz-74-pJK"/>
                         <outlet property="difficultyTextField" destination="u1m-OP-biQ" id="dPH-NC-UFh"/>
+                        <outlet property="editImageView" destination="AeV-O6-0bE" id="kI8-Yc-6Ym"/>
                         <outlet property="photoImageView" destination="Jk1-Bn-IuC" id="cke-Vh-K0Z"/>
                         <outlet property="pointsTextField" destination="4Oj-xm-eOf" id="MNJ-JO-hD3"/>
                         <outlet property="takePhotoButton" destination="rDB-Ke-Fui" id="5SC-Eu-qbO"/>
+                        <outlet property="uploadRoute" destination="j4Q-MR-Ymf" id="6GB-Qz-qQ6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wm6-gG-lQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2485.5999999999999" y="71.514242878560722"/>
+        </scene>
+        <!--Image Edition View Controller-->
+        <scene sceneID="f2T-RL-0mM">
+            <objects>
+                <viewController storyboardIdentifier="ImageEdition" automaticallyAdjustsScrollViewInsets="NO" id="GJs-mt-9Md" customClass="ImageEditionViewController" customModule="TaiwanRockClimbing" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hG3-HJ-JYl"/>
+                        <viewControllerLayoutGuide type="bottom" id="cKA-6r-kJp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ozl-ha-B19">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESL-h5-xL6">
+                                <rect key="frame" x="0.0" y="60" width="375" height="607"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bI2-Lq-lez">
+                                <rect key="frame" x="152.5" y="22" width="70" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="重新編輯">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reEditAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="94K-hG-5KX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="697-0g-1pG">
+                                <rect key="frame" x="16" y="22" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="取消編輯">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelEditAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="MPf-Ih-0VG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cl7-sd-WsO">
+                                <rect key="frame" x="288" y="22" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="編輯完成">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="editCompleteAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="NTW-5J-s1d"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12941176470588234" green="0.58823529411764708" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="bI2-Lq-lez" firstAttribute="centerX" secondItem="Ozl-ha-B19" secondAttribute="centerX" id="4G8-zc-dkl"/>
+                            <constraint firstItem="bI2-Lq-lez" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="2" id="Weh-I1-we8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="editImageView" destination="ESL-h5-xL6" id="voE-Jk-71L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fGh-6Z-5oO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3248.8000000000002" y="71.514242878560722"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="dLe-jB-nBo">
@@ -581,15 +667,19 @@
             </objects>
             <point key="canvasLocation" x="3208.8000000000002" y="760.56971514242889"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller View Controller-->
         <scene sceneID="qoJ-tk-Nm4">
             <objects>
-                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="QJZ-Pi-F4B" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="QJZ-Pi-F4B" customClass="NavigationControllerViewController" customModule="TaiwanRockClimbing" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n4i-HJ-zVO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="n4i-HJ-zVO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.12941176470588234" green="0.58823529411764708" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

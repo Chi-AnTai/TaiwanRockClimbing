@@ -18,56 +18,39 @@ class LandingViewController: UIViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
     
     @IBAction func registerAction(_ sender: UISegmentedControl) {
         switch loginSegmentControl.selectedSegmentIndex {
         case 1:
             nameTextField.isHidden = true
-            
+            loginButton.setTitle("登入", for: .normal)
         default:
             nameTextField.isHidden = false
+            loginButton.setTitle("註冊", for: .normal)
         }
     }
     
     @IBAction func registerButton(_ sender: UIButton) {
-        if loginSegmentControl.selectedSegmentIndex == 0 {
+        switch loginSegmentControl.selectedSegmentIndex {
+        case 0:
         if emailTextField.text == "" || nameTextField.text! == "" {
         let alertController = UIAlertController(title: "Error", message: "Please enter your email, password and name", preferredStyle: .alert)
-        
         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(defaultAction)
-        
         present(alertController, animated: true, completion: nil)
         
     } else {
-            
         Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
             print(user?.uid)
             
             if error == nil {
                 print("You have successfully signed up")
-                //Goes to the Setup page which lets the user take a photo for their profile picture and also chose a username
                 let databaseRef = Database.database().reference()
                 if let uid = user?.uid {
                 databaseRef.child("Users").child("\(uid)").setValue(["email": self.emailTextField.text!, "password": self.passwordTextField.text!, "name": self.nameTextField.text!])
                 }
-                
-                Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (User, Error) in
-                    print("login success")
-                    UserDefaults.standard.setValue(self.emailTextField.text!, forKey: "email")
-                    UserDefaults.standard.setValue(self.passwordTextField.text!, forKey: "password")
-                    
-                    
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    
-                                let target = storyboard.instantiateViewController(withIdentifier: "NavigationController") as UIViewController
-                                self.present(target, animated: false, completion: nil)
-                    
-                    
-                })
-                //databaseRef.child("Users").child
-                
-                                
+                self.signin()
             } else {
                 let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                 
@@ -78,77 +61,75 @@ class LandingViewController: UIViewController {
             }
         }
         }
-
-    }
-        if loginSegmentControl.selectedSegmentIndex == 1 {
-            Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (User, Error) in
-                print("login success")
-                UserDefaults.standard.setValue(self.emailTextField.text!, forKey: "email")
-                UserDefaults.standard.setValue(self.passwordTextField.text!, forKey: "password")
-                
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                
-                let target = storyboard.instantiateViewController(withIdentifier: "NavigationController") as UIViewController
-                self.present(target, animated: false, completion: nil)
-        
-        })
-        
-        
-        }}
+        default:
+            self.signin()
+                    }}
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("userDefault在此\(UserDefaults.standard.string(forKey: "email"))")
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2.0) {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let target = storyboard.instantiateViewController(withIdentifier: "NavigationController") as UIViewController
-//            self.present(target, animated: false, completion: nil)
-//        }
-    
-        
-    
-
-        // Do any additional setup after loading the view.
-    }
+            }
     override func viewWillAppear(_ animated: Bool) {
         if (UserDefaults.standard.string(forKey: "email")) != nil && (UserDefaults.standard.string(forKey: "password")) != nil {
-            
-            
             if let account = UserDefaults.standard.string(forKey: "email") as? String, let password = UserDefaults.standard.string(forKey: "password") as? String {
                 print("here is \(password) and \(account)")
             Auth.auth().signIn(withEmail: account, password: password, completion: { (User, Error) in
                 print("login success")
-                //UserDefaults.standard.setValue(self.emailTextField.text!, forKey: "email")
-               // UserDefaults.standard.setValue(self.passwordTextField.text!, forKey: "password")
-                
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                
-                let target = storyboard.instantiateViewController(withIdentifier: "NavigationController") as UIViewController
-                self.present(target, animated: false, completion: nil)
+                                
+self.presentNextViewcontroller()
                 }
                 
             )
 
         
          }
-        }}
+        }
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func createAccount() {
+        Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
+            print(user?.uid)
+            
+            if error == nil {
+                print("You have successfully signed up")
+                let databaseRef = Database.database().reference()
+                if let uid = user?.uid {
+                    databaseRef.child("Users").child("\(uid)").setValue(["email": self.emailTextField.text!, "password": self.passwordTextField.text!, "name": self.nameTextField.text!])
+                }
+            }
+            
+        }
     }
-    */
+    func signin() {
+        Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (User, Error) in
+            if Error == nil {
+                UserDefaults.standard.setValue(self.emailTextField.text!, forKey: "email")
+                UserDefaults.standard.setValue(self.passwordTextField.text!, forKey: "password")
+                self.presentNextViewcontroller()
+            }
+            else{
+                let alertController = UIAlertController(title: "Error", message: "Login Fail", preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+        })
+    }
+    
+    func presentNextViewcontroller() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let target = storyboard.instantiateViewController(withIdentifier: "NavigationController") as UIViewController
+        self.present(target, animated: false, completion: nil)
+    }
+
 
 }

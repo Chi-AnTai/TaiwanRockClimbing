@@ -65,8 +65,34 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var pointsTextField: UITextField!
     
+    @IBOutlet weak var editImageView: UIImageView!
     
+    @IBOutlet weak var uploadRoute: UIBarButtonItem!
+    
+    func alertGenerator(message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    
+    }
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
+        if areaTextField.text == "" {
+            alertGenerator(message: "area is empty")
+        }
+        else if difficultyTextField.text  == "" {
+            alertGenerator(message: "difficulty is empty")
+        }
+        else if colorTextField.text == "" {
+            alertGenerator(message: "color is empty")
+        }
+        else if pointsTextField.text == "" {
+            alertGenerator(message: "points is empty")
+
+        }
+        else{
         startAnimating(CGSize.init(width: 120, height: 120),message: "uploading")
         let storageRef = Storage.storage().reference()
         let uuid = NSUUID.init()
@@ -97,18 +123,18 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
             self.stopAnimating()
         }
         }
-        
+        }
     }
     
     
     
     @IBAction func takePhotoAction(_ sender: Any) {
         
-        //imagePickerController.sourceType = .photoLibrary
-        imagePickerController.sourceType = .camera
-        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        imagePickerController.sourceType = .photoLibrary
+        //imagePickerController.sourceType = .camera
+        //imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
        
-        imagePickerController.cameraCaptureMode = .photo
+        //imagePickerController.cameraCaptureMode = .photo
         imagePickerController.delegate = self
         
         imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
@@ -121,10 +147,18 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let videoNSURL = info[UIImagePickerControllerMediaURL] as? NSURL
-        //print("videoURL:\(String(describing: videoURL))")
+        
         let lowQualityImage = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.2)
         photoImageView.image = UIImage(data: lowQualityImage!)
-        self.dismiss(animated: true, completion: nil) }
+        self.dismiss(animated: true, completion: nil)
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let target = storyboard.instantiateViewController(withIdentifier: "ImageEdition") as! ImageEditionViewController
+        target.editImage = UIImage(data: lowQualityImage!)
+        target.destinationViewController = self
+        self.present(target, animated: false, completion: nil)
+            }
     
     
     
@@ -147,12 +181,11 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.navigationController?.isNavigationBarHidden = true
         difficultyPicker.delegate = self
         difficultyPicker.dataSource = self
         difficultyTextField.inputView = difficultyPicker
         
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
