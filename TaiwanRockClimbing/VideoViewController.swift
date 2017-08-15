@@ -13,6 +13,7 @@ import Firebase
 import AVFoundation
 import AVKit
 import NVActivityIndicatorView
+import SDWebImage
 
 
 
@@ -28,36 +29,78 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     var currentUser: CurrentUser?
     var uploaderName: [String] = []
     var uploaderEmail: [String] = []
-    var videoKey: [String] = []
+    var videoKey: [String] = [] {
+        didSet {
+            routeInfoLabel.text = "\(routeInfo) 目前有\(videoKey.count)部影片"
+        }
+    }
+    var routeInfo: String = ""
     
-    
+       
+    @IBOutlet weak var routeInfoLabel: UILabel!
         
     @IBOutlet weak var routeImageView: UIImageView!
     
     @IBOutlet weak var videoTableView: UITableView!
 
     @IBAction func addVideo(_ sender: UIBarButtonItem) {
-        imagePickerController.sourceType = .camera
+//        imagePickerController.sourceType = .camera
+//        imagePickerController.delegate = self
+//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+//        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+//        present(imagePickerController, animated: true, completion: nil)
+        
+        let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        
+        let attributedString = NSAttributedString(string: "請盡量橫拍", attributes: [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 20), //your font here
+            NSForegroundColorAttributeName : UIColor.red
+            ])
+        alertController.setValue(attributedString, forKey: "attributedTitle")
+        
+        
+        let recordAction = UIAlertAction(title: "拍攝影片", style: .default) { (UIAlertAction) in
+            self.recordVideo()
+        }
+        alertController.addAction(recordAction)
+        let pickAction = UIAlertAction(title: "選取影片", style: .default) { (UIAlertAction) in
+            self.pickVideo()
+        }
+        alertController.addAction(pickAction)
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+    
+    func recordVideo() {
+                imagePickerController.sourceType = .camera
+                imagePickerController.delegate = self
+                imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+                imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+                present(imagePickerController, animated: true, completion: nil)
+    
+    }
+    
+    
+    func pickVideo() {
+        imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
-        
-        
-        
+    
     }
     
 
     
     var movieData: Data?
 
-    @IBAction func pickVideoAction(_ sender: Any) {
-        imagePickerController.sourceType = .camera
-        imagePickerController.delegate = self
-        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
-        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
-        present(imagePickerController, animated: true, completion: nil)
-    }
+//    @IBAction func pickVideoAction(_ sender: Any) {
+//        imagePickerController.sourceType = .camera
+//        imagePickerController.delegate = self
+//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+//        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+//        present(imagePickerController, animated: true, completion: nil)
+//    }
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -98,8 +141,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }
     
     
-    @IBOutlet weak var pickVideo: UIButton!
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return thunbnailImages.count
         return imageDic.count
@@ -111,22 +153,18 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "routeCell", for: indexPath) as! RouteCell
         
-//        if let imageURL = URL(string: urls[indexPath.row]) {
-//        
-//        let asset = AVAsset(url: imageURL)
-//        let imageGenerator = AVAssetImageGenerator(asset: asset)
-//        
-//        do {
-//            print("making image")
-//            let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
-//            cell.thunbnailImageView.image = UIImage.init(cgImage: thunbnailCGImage)
-//        }
-//        catch {}
-//        }
-        //cell.thunbnailImageView.image = thunbnailImages[indexPath.row]
+
         cell.thunbnailImageView.image = imageDic[urls[indexPath.row]]
         cell.thunbnailImageView.clipsToBounds = true
         cell.thunbnailImageView.layer.cornerRadius = 8
+        
+        
+        cell.shadowView.layer.shadowColor = UIColor.gray.cgColor
+        cell.shadowView.layer.shadowRadius = 8
+        cell.shadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        cell.shadowView.layer.shadowOpacity = 0.5
+        
+        
         cell.playButton.tag = indexPath.row
         cell.playButton.tintColor = UIColor.white
         cell.playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
@@ -163,25 +201,31 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        routeInfoLabel.text = "\(routeInfo) 目前有\(videoKey.count)部影片"
         print(autoID)
-        
-        DispatchQueue.global().async {
-            if let url = self.rouleImageURL {
-                let downloadURL = URL(string: url)
-                let data = try? Data(contentsOf: downloadURL!)
-                DispatchQueue.main.async {
-                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
-                    self.routeImageView.image = UIImage(data: data!)
-                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
-                    self.videoTableView.reloadData()
-                    
-                    
-                    
-                }
-                
-            }
-
+        if let url = self.rouleImageURL {
+            let downloadURL = URL(string: url)
+        self.routeImageView.sd_setImage(with: downloadURL, placeholderImage: UIImage.init(named: "icon_photo"))
+            self.routeImageView.contentMode = UIViewContentMode.scaleToFill
         }
+        
+//        DispatchQueue.global().async {
+//            if let url = self.rouleImageURL {
+//                let downloadURL = URL(string: url)
+//                let data = try? Data(contentsOf: downloadURL!)
+//                DispatchQueue.main.async {
+//                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+//                    self.routeImageView.image = UIImage(data: data!)
+//                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+//                    self.videoTableView.reloadData()
+//                    
+//                    
+//                    
+//                }
+//                
+//            }
+//
+//        }
 //        if let url = self.rouleImageURL {
 //        let downloadURL = URL(string: url)
 //        let data = try? Data(contentsOf: downloadURL!)
@@ -214,20 +258,26 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                         let imageGenerator = AVAssetImageGenerator(asset: asset)
                         
                         do {
-                            print("making image")
+                            
                             let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
                             
                             let thunbImage = UIImage.init(cgImage: thunbnailCGImage)
                             self.imageDic[requestData["url"]!] = thunbImage
                             //self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage))
                             print(self.thunbnailImages.count)
-                            //self.videoTableView.reloadData()                     
-                        }
-                        catch {}
-                        DispatchQueue.main.async {
-                            self.videoTableView.reloadData()
+                            //self.videoTableView.reloadData() 
+                            print("making image done")
+                            DispatchQueue.main.async {
+                                self.videoTableView.reloadData()
+                                
+                            }
 
                         }
+                        catch {}
+//                        DispatchQueue.main.async {
+//                            self.videoTableView.reloadData()
+//
+//                        }
                         
                     }
 
@@ -252,7 +302,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 
                 
                 
-                self.videoTableView.reloadData()
+                //self.videoTableView.reloadData()
                 
             }})
 

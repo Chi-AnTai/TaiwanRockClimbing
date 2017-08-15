@@ -165,8 +165,9 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
                 targetViewController.gym = self.gym
                 targetViewController.currentUser = self.currentUser
                 targetViewController.rouleImageURL = cell.imageURL
-                if let passID = cell.autoID  {
+                if let passID = cell.autoID, let difficulty = cell.difficultyLabel.text, let areaColor = cell.areaColorLabel.text, let points = cell.pointsLabel.text {
                 targetViewController.autoID = passID
+                targetViewController.routeInfo = "\(difficulty)  \(areaColor) "
                 }
                 
             }

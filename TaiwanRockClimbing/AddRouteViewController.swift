@@ -12,25 +12,6 @@ import MobileCoreServices
 import NVActivityIndicatorView
 
 extension UIImage {
-    enum JPEGQuality: CGFloat {
-        case lowest  = 0
-        case low     = 0.25
-        case medium  = 0.5
-        case high    = 0.75
-        case highest = 1
-    }
-    
-    /// Returns the data for the specified image in PNG format
-    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
-    /// - returns: A data object containing the PNG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
-    var png: Data? { return UIImagePNGRepresentation(self) }
-    
-    /// Returns the data for the specified image in JPEG format.
-    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
-    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
-    func jpeg(_ quality: JPEGQuality) -> Data? {
-        return UIImageJPEGRepresentation(self, quality.rawValue)
-    }
     
     func resizeImageWith(newSize: CGSize) -> UIImage {
         
@@ -130,17 +111,46 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func takePhotoAction(_ sender: Any) {
         
-        imagePickerController.sourceType = .photoLibrary
-        //imagePickerController.sourceType = .camera
-        //imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
-       
-        //imagePickerController.cameraCaptureMode = .photo
+        let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        
+        let attributedString = NSAttributedString(string: "請盡量橫拍", attributes: [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 20), //your font here
+            NSForegroundColorAttributeName : UIColor.red
+            ])
+        alertController.setValue(attributedString, forKey: "attributedTitle")
+        
+        
+        let recordAction = UIAlertAction(title: "拍攝照片", style: .default) { (UIAlertAction) in
+            self.takePhoto()
+        }
+        alertController.addAction(recordAction)
+        let pickAction = UIAlertAction(title: "選取照片", style: .default) { (UIAlertAction) in
+            self.pickPhoto()
+        }
+        alertController.addAction(pickAction)
+        self.present(alertController, animated: true, completion: nil)
+    
+    }
+    
+    func takePhoto() {
+        
+        imagePickerController.sourceType = .camera
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        
+        imagePickerController.cameraCaptureMode = .photo
         imagePickerController.delegate = self
         
         imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
 
+    }
+    func pickPhoto() {
+    imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
         
+        imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
+        present(imagePickerController, animated: true, completion: nil)
+    
     }
     
     @IBOutlet weak var photoImageView: UIImageView!

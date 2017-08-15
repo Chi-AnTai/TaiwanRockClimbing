@@ -41,6 +41,7 @@ class GymCell: UITableViewCell {
 
 class RouteCell: UITableViewCell {
 
+    @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var thunbnailImageView: UIImageView!
     
     @IBOutlet weak var playButton: UIButton!
