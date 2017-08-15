@@ -13,6 +13,7 @@ import Firebase
 import AVFoundation
 import AVKit
 import NVActivityIndicatorView
+import SDWebImage
 
 
 
@@ -43,11 +44,50 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBOutlet weak var videoTableView: UITableView!
 
     @IBAction func addVideo(_ sender: UIBarButtonItem) {
-        imagePickerController.sourceType = .camera
+//        imagePickerController.sourceType = .camera
+//        imagePickerController.delegate = self
+//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+//        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+//        present(imagePickerController, animated: true, completion: nil)
+        
+        let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        
+        let attributedString = NSAttributedString(string: "請盡量橫拍", attributes: [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 20), //your font here
+            NSForegroundColorAttributeName : UIColor.red
+            ])
+        alertController.setValue(attributedString, forKey: "attributedTitle")
+        
+        
+        let recordAction = UIAlertAction(title: "拍攝影片", style: .default) { (UIAlertAction) in
+            self.recordVideo()
+        }
+        alertController.addAction(recordAction)
+        let pickAction = UIAlertAction(title: "選取影片", style: .default) { (UIAlertAction) in
+            self.pickVideo()
+        }
+        alertController.addAction(pickAction)
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+    
+    func recordVideo() {
+                imagePickerController.sourceType = .camera
+                imagePickerController.delegate = self
+                imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+                imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+                present(imagePickerController, animated: true, completion: nil)
+    
+    }
+    
+    
+    func pickVideo() {
+        imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
+    
     }
     
 
@@ -163,24 +203,29 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         super.viewDidLoad()
         routeInfoLabel.text = "\(routeInfo) 目前有\(videoKey.count)部影片"
         print(autoID)
-        
-        DispatchQueue.global().async {
-            if let url = self.rouleImageURL {
-                let downloadURL = URL(string: url)
-                let data = try? Data(contentsOf: downloadURL!)
-                DispatchQueue.main.async {
-                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
-                    self.routeImageView.image = UIImage(data: data!)
-                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
-                    self.videoTableView.reloadData()
-                    
-                    
-                    
-                }
-                
-            }
-
+        if let url = self.rouleImageURL {
+            let downloadURL = URL(string: url)
+        self.routeImageView.sd_setImage(with: downloadURL, placeholderImage: UIImage.init(named: "icon_photo"))
+            self.routeImageView.contentMode = UIViewContentMode.scaleToFill
         }
+        
+//        DispatchQueue.global().async {
+//            if let url = self.rouleImageURL {
+//                let downloadURL = URL(string: url)
+//                let data = try? Data(contentsOf: downloadURL!)
+//                DispatchQueue.main.async {
+//                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+//                    self.routeImageView.image = UIImage(data: data!)
+//                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+//                    self.videoTableView.reloadData()
+//                    
+//                    
+//                    
+//                }
+//                
+//            }
+//
+//        }
 //        if let url = self.rouleImageURL {
 //        let downloadURL = URL(string: url)
 //        let data = try? Data(contentsOf: downloadURL!)

@@ -592,19 +592,8 @@
                                     <action selector="reEditAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="94K-hG-5KX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="697-0g-1pG">
-                                <rect key="frame" x="16" y="22" width="76" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="取消編輯">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelEditAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="MPf-Ih-0VG"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cl7-sd-WsO">
-                                <rect key="frame" x="288" y="22" width="71" height="30"/>
+                                <rect key="frame" x="288" y="23" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="編輯完成">
@@ -612,6 +601,17 @@
                                 </state>
                                 <connections>
                                     <action selector="editCompleteAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="NTW-5J-s1d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="697-0g-1pG">
+                                <rect key="frame" x="16" y="23" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="取消編輯">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelEditAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="MPf-Ih-0VG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -634,7 +634,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="QJZ-Pi-F4B" customClass="NavigationControllerViewController" customModule="TaiwanRockClimbing" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="n4i-HJ-zVO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n4i-HJ-zVO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -13,5 +13,6 @@ target 'TaiwanRockClimbing' do
   pod "Firebase/Auth"
   pod "IQKeyboardManagerSwift"
   pod "NVActivityIndicatorView"
+  pod 'SDWebImage', '~> 4.0'
 
 end

@@ -111,17 +111,46 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func takePhotoAction(_ sender: Any) {
         
-        imagePickerController.sourceType = .photoLibrary
-        //imagePickerController.sourceType = .camera
-        //imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
-       
-        //imagePickerController.cameraCaptureMode = .photo
+        let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        
+        let attributedString = NSAttributedString(string: "請盡量橫拍", attributes: [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 20), //your font here
+            NSForegroundColorAttributeName : UIColor.red
+            ])
+        alertController.setValue(attributedString, forKey: "attributedTitle")
+        
+        
+        let recordAction = UIAlertAction(title: "拍攝照片", style: .default) { (UIAlertAction) in
+            self.takePhoto()
+        }
+        alertController.addAction(recordAction)
+        let pickAction = UIAlertAction(title: "選取照片", style: .default) { (UIAlertAction) in
+            self.pickPhoto()
+        }
+        alertController.addAction(pickAction)
+        self.present(alertController, animated: true, completion: nil)
+    
+    }
+    
+    func takePhoto() {
+        
+        imagePickerController.sourceType = .camera
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        
+        imagePickerController.cameraCaptureMode = .photo
         imagePickerController.delegate = self
         
         imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
 
+    }
+    func pickPhoto() {
+    imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
         
+        imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
+        present(imagePickerController, animated: true, completion: nil)
+    
     }
     
     @IBOutlet weak var photoImageView: UIImageView!
