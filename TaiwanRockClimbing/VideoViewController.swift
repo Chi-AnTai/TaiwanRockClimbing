@@ -178,6 +178,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }
     
     func playVideo(sender: UIButton) {
+        Analytics.logEvent("play video", parameters: [autoID:videoKey[sender.tag]])
+
     print(sender.tag)
         let avplayerController = AVPlayerViewController()
         

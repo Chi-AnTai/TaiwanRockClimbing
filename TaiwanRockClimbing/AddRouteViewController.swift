@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import MobileCoreServices
 import NVActivityIndicatorView
+import Crashlytics
 
 extension UIImage {
     
@@ -60,6 +61,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     }
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
+        
         if areaTextField.text == "" {
             alertGenerator(message: "area is empty")
         }
@@ -133,6 +135,10 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func takePhoto() {
+       
+            Crashlytics.sharedInstance().crash()
+        
+
         
         imagePickerController.sourceType = .camera
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
