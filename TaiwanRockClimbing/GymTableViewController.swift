@@ -27,7 +27,7 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
         
         return cell
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? GymCell {
             if let targetViewController = segue.destination as? DifficultyViewController {
@@ -40,35 +40,35 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
             }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let databaseRef = Database.database().reference()
         if let userID = Auth.auth().currentUser?.uid {
-        databaseRef.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let requestData = snapshot.value as? [String: String] {
-                self.currentUser = CurrentUser(name: requestData["name"]!, email: requestData["email"]!, password: requestData["password"]!, uid: snapshot.key)
-                print(self.currentUser!.name)
-            
-            }
-            
-        })
+            databaseRef.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let requestData = snapshot.value as? [String: String] {
+                    self.currentUser = CurrentUser(name: requestData["name"]!, email: requestData["email"]!, password: requestData["password"]!, uid: snapshot.key)
+                    print(self.currentUser!.name)
+                    
+                }
+                
+            })
         }
         
         databaseRef.child("gym").observe(.childAdded, with: { (snapshot) in
             
             if let requestData = snapshot.value as? [String:String] {
                 self.gymTitle.append(requestData["title"]!)
-           
+                
                 self.gymTableView.reloadData()
             }
-
+            
         }
-
-
-      )  // Do any additional setup after loading the view.
+            
+            
+        )  // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

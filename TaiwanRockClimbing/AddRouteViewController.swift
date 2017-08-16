@@ -27,7 +27,7 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage!
     }
-
+    
 }
 
 
@@ -58,7 +58,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         alertController.addAction(defaultAction)
         
         present(alertController, animated: true, completion: nil)
-    
+        
     }
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
         
@@ -73,39 +73,39 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         else if pointsTextField.text == "" {
             alertGenerator(message: "points is empty")
-
+            
         }
         else{
-        startAnimating(CGSize.init(width: 120, height: 120),message: "uploading")
-        let storageRef = Storage.storage().reference()
-        let uuid = NSUUID.init()
-        if photoImageView.image != nil {
-        let resizedPhoto = photoImageView.image?.resizeImageWith(newSize: CGSize(width: 120.0, height: 120.0))
-        let imageData = UIImageJPEGRepresentation(resizedPhoto!, 1)
-            //UIImageJPEGRepresentation(photoImageView.image!, 0.3)
-            //UIImagePNGRepresentation(photoImageView.image!)
-            
-        let uploadImage = storageRef.child("\(uuid).png").putData(imageData!, metadata: nil) { (metadata, error) in
-            guard let metadata = metadata else {
-                self.stopAnimating()
-                // Uh-oh, an error occurred!
-                return
+            startAnimating(CGSize.init(width: 120, height: 120),message: "uploading")
+            let storageRef = Storage.storage().reference()
+            let uuid = NSUUID.init()
+            if photoImageView.image != nil {
+                let resizedPhoto = photoImageView.image?.resizeImageWith(newSize: CGSize(width: 120.0, height: 120.0))
+                let imageData = UIImageJPEGRepresentation(resizedPhoto!, 1)
+                //UIImageJPEGRepresentation(photoImageView.image!, 0.3)
+                //UIImagePNGRepresentation(photoImageView.image!)
                 
+                let uploadImage = storageRef.child("\(uuid).png").putData(imageData!, metadata: nil) { (metadata, error) in
+                    guard let metadata = metadata else {
+                        self.stopAnimating()
+                        // Uh-oh, an error occurred!
+                        return
+                        
+                    }
+                    print(metadata)
+                    if let downloadUrl = metadata.downloadURL() {
+                        
+                        let downloadUrlString = String(describing: downloadUrl)
+                        
+                        let databaseRef = Database.database().reference()
+                        let difficultyPath = self.difficultyRoute(difficulty: self.difficultyTextField.text!)
+                        let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString, "imageUUID": "\(uuid)", "creator": self.currentUser!.email])
+                        self.stopAnimating()
+                        
+                    }
+                    self.stopAnimating()
+                }
             }
-            print(metadata)
-            if let downloadUrl = metadata.downloadURL() {
-            
-            let downloadUrlString = String(describing: downloadUrl)
-            
-            let databaseRef = Database.database().reference()
-            let difficultyPath = self.difficultyRoute(difficulty: self.difficultyTextField.text!)
-            let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString, "imageUUID": "\(uuid)", "creator": self.currentUser!.email])
-                self.stopAnimating()
-            
-            }
-            self.stopAnimating()
-        }
-        }
         }
     }
     
@@ -131,14 +131,14 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         alertController.addAction(pickAction)
         self.present(alertController, animated: true, completion: nil)
-    
+        
     }
     
     func takePhoto() {
-       
-            Crashlytics.sharedInstance().crash()
         
-
+        Crashlytics.sharedInstance().crash()
+        
+        
         
         imagePickerController.sourceType = .camera
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
@@ -148,15 +148,15 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         
         imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
-
+        
     }
     func pickPhoto() {
-    imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
         
         imagePickerController.mediaTypes = [kUTTypeImage as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
-    
+        
     }
     
     @IBOutlet weak var photoImageView: UIImageView!
@@ -167,14 +167,14 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         let lowQualityImage = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.2)
         photoImageView.image = UIImage(data: lowQualityImage!)
         self.dismiss(animated: true, completion: nil)
-
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let target = storyboard.instantiateViewController(withIdentifier: "ImageEdition") as! ImageEditionViewController
         target.editImage = UIImage(data: lowQualityImage!)
         target.destinationViewController = self
         self.present(target, animated: false, completion: nil)
-            }
+    }
     
     
     
@@ -194,7 +194,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController?.isNavigationBarHidden = true
@@ -203,7 +203,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         difficultyTextField.inputView = difficultyPicker
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -211,7 +211,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func difficultyRoute(difficulty: String) -> String {
         if difficulty == "V0" || difficulty == "V1" {
-        return "V0V1"
+            return "V0V1"
         }
         if difficulty == "V2" || difficulty == "V3" {
             return "V2V3"
@@ -220,18 +220,18 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
             return "V4V5"
         }
         return "V6V7"
-
+        
     }
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
