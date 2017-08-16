@@ -69,7 +69,7 @@ class LandingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            }
+                    }
     override func viewWillAppear(_ animated: Bool) {
         if (UserDefaults.standard.string(forKey: "email")) != nil && (UserDefaults.standard.string(forKey: "password")) != nil {
             if let account = UserDefaults.standard.string(forKey: "email") as? String, let password = UserDefaults.standard.string(forKey: "password") as? String {

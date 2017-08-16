@@ -2,28 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Fabric</key>
-    <dict>
-        <key>APIKey</key>
-        <string>b225a01409e510b9054dc2126f0e0951dab25dfa</string>
-        <key>Kits</key>
-        <array>
-            <dict>
-                <key>KitInfo</key>
-                <dict/>
-                <key>KitName</key>
-                <string>Crashlytics</string>
-            </dict>
-        </array>
-    </dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>record video</string>
-	<key>NSCameraUsageDescription</key>
-	<string>take video</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>upload photo</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>upload video</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -40,10 +18,32 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>b225a01409e510b9054dc2126f0e0951dab25dfa</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>upload video</string>
+	<key>NSCameraUsageDescription</key>
+	<string>take video</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>record video</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>upload photo</string>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -389,6 +389,7 @@
 			baseConfigurationReference = 8870EE26C180FD5169B26A93 /* Pods-TaiwanRockClimbing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Q7N8D3YCYC;
 				INFOPLIST_FILE = TaiwanRockClimbing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

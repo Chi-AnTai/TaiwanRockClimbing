@@ -31,7 +31,7 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? GymCell {
             if let targetViewController = segue.destination as? DifficultyViewController {
-                Analytics.logEvent("cell.gymTitleLabel.text!", parameters: nil)
+                Analytics.logEvent("\(cell.gymTitleLabel.text!)", parameters: nil)
                 
                 targetViewController.gym = cell.gymTitleLabel.text!
                 targetViewController.currentUser = self.currentUser

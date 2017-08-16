@@ -24,7 +24,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     var rouleImageURL: String?
     var autoID: String = "none"
     var urls: [String] = []
-    var thunbnailImages: [UIImage] = []
+    var thunbnailImages: [UIImage] = []     
     var imageDic: [String:UIImage] = [:]
     var currentUser: CurrentUser?
     var uploaderName: [String] = []
@@ -36,20 +36,14 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }
     var routeInfo: String = ""
     
-       
+    
     @IBOutlet weak var routeInfoLabel: UILabel!
-        
+    
     @IBOutlet weak var routeImageView: UIImageView!
     
     @IBOutlet weak var videoTableView: UITableView!
-
+    
     @IBAction func addVideo(_ sender: UIBarButtonItem) {
-//        imagePickerController.sourceType = .camera
-//        imagePickerController.delegate = self
-//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
-//        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
-//        present(imagePickerController, animated: true, completion: nil)
-        
         let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         
         let attributedString = NSAttributedString(string: "請盡量橫拍", attributes: [
@@ -68,16 +62,16 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
         alertController.addAction(pickAction)
         self.present(alertController, animated: true, completion: nil)
-
+        
     }
     
     func recordVideo() {
-                imagePickerController.sourceType = .camera
-                imagePickerController.delegate = self
-                imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
-                imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
-                present(imagePickerController, animated: true, completion: nil)
-    
+        imagePickerController.sourceType = .camera
+        imagePickerController.delegate = self
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+        present(imagePickerController, animated: true, completion: nil)
+        
     }
     
     
@@ -87,22 +81,13 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
-    
+        
     }
     
-
+    
     
     var movieData: Data?
 
-//    @IBAction func pickVideoAction(_ sender: Any) {
-//        imagePickerController.sourceType = .camera
-//        imagePickerController.delegate = self
-//        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
-//        imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
-//        present(imagePickerController, animated: true, completion: nil)
-//    }
-    
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
         let videoNSURL = info[UIImagePickerControllerMediaURL] as? NSURL
@@ -118,12 +103,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             let storage = Storage.storage()
             let storageRef = storage.reference()
             let uuid = NSUUID.init()
-                        let uploadTask = storageRef.child(autoID).child("\(uuid).mp4").putData(movieData!, metadata: nil) { (metadata, error) in
+            let uploadTask = storageRef.child(autoID).child("\(uuid).mp4").putData(movieData!, metadata: nil) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
-                
-            }
+                    
+                }
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 let databaseRef = Database.database().reference()
                 let downloadURL = metadata.downloadURL()
@@ -131,21 +116,21 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 let asset = AVAsset(url: downloadURL!)
                 let imageGenerator = AVAssetImageGenerator(asset: asset)
                 if let realdownloadURL = downloadURL {
-                databaseRef.child("video").child(self.autoID).child("\(uuid)").setValue(["url": "\(realdownloadURL)", "name": self.currentUser!.name, "email": self.currentUser!.email])
+                    databaseRef.child("video").child(self.autoID).child("\(uuid)").setValue(["url": "\(realdownloadURL)", "name": self.currentUser!.name, "email": self.currentUser!.email])
                 }
                 self.stopAnimating()
-
+                
             }
         }
         
     }
     
     
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return thunbnailImages.count
         return imageDic.count
-    
+        
     }
     
     
@@ -153,7 +138,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "routeCell", for: indexPath) as! RouteCell
         
-
+        
         cell.thunbnailImageView.image = imageDic[urls[indexPath.row]]
         cell.thunbnailImageView.clipsToBounds = true
         cell.thunbnailImageView.layer.cornerRadius = 8
@@ -174,23 +159,23 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         cell.uploaderLabel.text = "Uploaded by \(uploaderName[indexPath.row])"
         print("cellname=\(uploaderName[indexPath.row])")
         
-                return cell
+        return cell
     }
     
     func playVideo(sender: UIButton) {
         Analytics.logEvent("play video", parameters: [autoID:videoKey[sender.tag]])
-
-    print(sender.tag)
+        
+        print(sender.tag)
         let avplayerController = AVPlayerViewController()
         
         
         if let playVideoURL = URL(string: urls[sender.tag]){
-        let player = AVPlayer(url: playVideoURL)
-        
-        
-        avplayerController.player = player
+            let player = AVPlayer(url: playVideoURL)
+            
+            
+            avplayerController.player = player
             player.play()
-        self.showDetailViewController(avplayerController, sender: self)
+            self.showDetailViewController(avplayerController, sender: self)
         }
     }
     
@@ -200,39 +185,39 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         routeInfoLabel.text = "\(routeInfo) 目前有\(videoKey.count)部影片"
         print(autoID)
         if let url = self.rouleImageURL {
             let downloadURL = URL(string: url)
-        self.routeImageView.sd_setImage(with: downloadURL, placeholderImage: UIImage.init(named: "icon_photo"))
+            self.routeImageView.sd_setImage(with: downloadURL, placeholderImage: UIImage.init(named: "icon_photo"))
             self.routeImageView.contentMode = UIViewContentMode.scaleToFill
         }
         
-//        DispatchQueue.global().async {
-//            if let url = self.rouleImageURL {
-//                let downloadURL = URL(string: url)
-//                let data = try? Data(contentsOf: downloadURL!)
-//                DispatchQueue.main.async {
-//                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
-//                    self.routeImageView.image = UIImage(data: data!)
-//                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
-//                    self.videoTableView.reloadData()
-//                    
-//                    
-//                    
-//                }
-//                
-//            }
-//
-//        }
-//        if let url = self.rouleImageURL {
-//        let downloadURL = URL(string: url)
-//        let data = try? Data(contentsOf: downloadURL!)
-//            routeImageView.image = UIImage(data: data!)
-//        }
+        //        DispatchQueue.global().async {
+        //            if let url = self.rouleImageURL {
+        //                let downloadURL = URL(string: url)
+        //                let data = try? Data(contentsOf: downloadURL!)
+        //                DispatchQueue.main.async {
+        //                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+        //                    self.routeImageView.image = UIImage(data: data!)
+        //                    self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+        //                    self.videoTableView.reloadData()
+        //
+        //
+        //
+        //                }
+        //
+        //            }
+        //
+        //        }
+        //        if let url = self.rouleImageURL {
+        //        let downloadURL = URL(string: url)
+        //        let data = try? Data(contentsOf: downloadURL!)
+        //            routeImageView.image = UIImage(data: data!)
+        //        }
         
         
         let databaseRef = Database.database().reference()
@@ -251,7 +236,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                     self.uploaderEmail.append(email)
                     self.videoKey.append(snapshot.key)
                 }
-                    self.urls.append(requestData["url"]!)
+                self.urls.append(requestData["url"]!)
                 DispatchQueue.global().async {
                     
                     if let imageURL = URL(string: requestData["url"]!) {
@@ -267,37 +252,34 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                             self.imageDic[requestData["url"]!] = thunbImage
                             //self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage))
                             print(self.thunbnailImages.count)
-                            //self.videoTableView.reloadData() 
+                            //self.videoTableView.reloadData()
                             print("making image done")
                             DispatchQueue.main.async {
                                 self.videoTableView.reloadData()
                                 
                             }
-
+                            
                         }
                         catch {}
-//                        DispatchQueue.main.async {
-//                            self.videoTableView.reloadData()
-//
-//                        }
+                        
                         
                     }
-
+                    
                 }
-//                if let imageURL = URL(string: self.urls[self.urls.count-1]) {
-//                    
-//                    let asset = AVAsset(url: imageURL)
-//                    let imageGenerator = AVAssetImageGenerator(asset: asset)
-//                    
-//                    do {
-//                        print("making image")
-//                        let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
-//                        self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage)
-//)                     }
-//                    catch {}
-//                    self.videoTableView.reloadData()
-//                }
-//
+                //                if let imageURL = URL(string: self.urls[self.urls.count-1]) {
+                //
+                //                    let asset = AVAsset(url: imageURL)
+                //                    let imageGenerator = AVAssetImageGenerator(asset: asset)
+                //
+                //                    do {
+                //                        print("making image")
+                //                        let thunbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
+                //                        self.thunbnailImages.append(UIImage.init(cgImage: thunbnailCGImage)
+                //)                     }
+                //                    catch {}
+                //                    self.videoTableView.reloadData()
+                //                }
+                //
                 
                 
                 
@@ -307,19 +289,19 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 //self.videoTableView.reloadData()
                 
             }})
-
- //       if self.rouleImageURL != nil {
- //           let routeURL = URL(string: self.rouleImageURL!)
- //           if let data = try? Data(contentsOf: routeURL!) {
- //     //  routeImageView.image = UIImage(data: data)
         
-  //          }
-  //      }
+        //       if self.rouleImageURL != nil {
+        //           let routeURL = URL(string: self.rouleImageURL!)
+        //           if let data = try? Data(contentsOf: routeURL!) {
+        //     //  routeImageView.image = UIImage(data: data)
+        
+        //          }
+        //      }
         
         
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -355,11 +337,11 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                             // Uh-oh, an error occurred!
                         } else {
                             print("success")
-                           
+                            
                             // File deleted successfully
                         }
                     })
-
+                    
                 }
                 alertController.addAction(okAction)
                 
@@ -368,8 +350,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                     alertController,
                     animated: true,
                     completion: nil)
-
-                        }
+                
+            }
             else {
                 
                 let alertController = UIAlertController(title: "錯誤", message: "這不是你上傳的影片", preferredStyle: .alert)
@@ -382,8 +364,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                     alertController,
                     animated: true,
                     completion: nil)
-
-            print("not match")
+                
+                print("not match")
             }
             // remove the item from the data model
             
@@ -394,38 +376,38 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
     }
     
-//    func deleteSomething() {
-//        // 建立一個提示框
-//        let alertController = UIAlertController(
-//            title: "刪除",
-//            message: "刪除字樣會變紅色的",
-//            preferredStyle: .alert)
-//        
-//        // 建立[取消]按鈕
-//        
-//        
-//        
-//        let cancelAction = UIAlertAction(
-//            title: "取消",
-//            style: .cancel,
-//            handler: nil)
-//        alertController.addAction(cancelAction)
-//        
-//        // 建立[刪除]按鈕
-//        let okAction = UIAlertAction(title: "刪除", style: .destructive) { (UIAlertAction) in
-//            print("deleting")
-//        }
-//        alertController.addAction(okAction)
-//        
-//        // 顯示提示框
-//        self.present(
-//            alertController,
-//            animated: true,
-//            completion: nil)
-//    }
-
-
-
-
+    //    func deleteSomething() {
+    //        // 建立一個提示框
+    //        let alertController = UIAlertController(
+    //            title: "刪除",
+    //            message: "刪除字樣會變紅色的",
+    //            preferredStyle: .alert)
+    //        
+    //        // 建立[取消]按鈕
+    //        
+    //        
+    //        
+    //        let cancelAction = UIAlertAction(
+    //            title: "取消",
+    //            style: .cancel,
+    //            handler: nil)
+    //        alertController.addAction(cancelAction)
+    //        
+    //        // 建立[刪除]按鈕
+    //        let okAction = UIAlertAction(title: "刪除", style: .destructive) { (UIAlertAction) in
+    //            print("deleting")
+    //        }
+    //        alertController.addAction(okAction)
+    //        
+    //        // 顯示提示框
+    //        self.present(
+    //            alertController,
+    //            animated: true,
+    //            completion: nil)
+    //    }
+    
+    
+    
+    
 }
 
