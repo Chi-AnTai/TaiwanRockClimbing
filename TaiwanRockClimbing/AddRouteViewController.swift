@@ -101,6 +101,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
                         let difficultyPath = self.difficultyRoute(difficulty: self.difficultyTextField.text!)
                         let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString, "imageUUID": "\(uuid)", "creator": self.currentUser!.email])
                         self.stopAnimating()
+                        self.navigationController?.popViewController(animated: true)
                         
                     }
                     self.stopAnimating()
@@ -135,13 +136,10 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func takePhoto() {
-        
-        Crashlytics.sharedInstance().crash()
-        
-        
+    
         
         imagePickerController.sourceType = .camera
-        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeMedium
         
         imagePickerController.cameraCaptureMode = .photo
         imagePickerController.delegate = self

@@ -66,7 +66,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func recordVideo() {
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
-        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeMedium
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
         
@@ -76,7 +76,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func pickVideo() {
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
-        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeLow
+        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeMedium
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
         
@@ -160,7 +160,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }
     
     func playVideo(sender: UIButton) {
-        Analytics.logEvent("play video", parameters: [autoID:videoKey[sender.tag]])
+        print("autoID\(autoID)")
+        print("videokey  \(videoKey[sender.tag])")
+        Analytics.logEvent("playvideo", parameters: [autoID:videoKey[sender.tag]])
         
        
         let avplayerController = AVPlayerViewController()
@@ -169,7 +171,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         if let playVideoURL = URL(string: urls[sender.tag]){
             let player = AVPlayer(url: playVideoURL)
             
-            
+
             avplayerController.player = player
             player.play()
             self.showDetailViewController(avplayerController, sender: self)
@@ -197,7 +199,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
         
         databaseRef.child("video").child(autoID).observe(.childAdded, with: { (snapshot) in
-            
+            print("downloading\(snapshot)")
             if let requestData = snapshot.value as? [String:String] {
              
                 
