@@ -45,7 +45,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func addVideo(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         
-        let attributedString = NSAttributedString(string: "請盡量橫拍", attributes: [
+        let attributedString = NSAttributedString(string: "影片長度上限一分鐘", attributes: [
             NSFontAttributeName : UIFont.systemFont(ofSize: 20),             NSForegroundColorAttributeName : UIColor.red
             ])
         alertController.setValue(attributedString, forKey: "attributedTitle")
@@ -58,7 +58,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         let pickAction = UIAlertAction(title: "選取影片", style: .default) { (UIAlertAction) in
             self.pickVideo()
         }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alertController.addAction(pickAction)
+        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
         
     }
@@ -68,6 +70,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         imagePickerController.delegate = self
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeMedium
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
+        imagePickerController.videoMaximumDuration = 60.0
         present(imagePickerController, animated: true, completion: nil)
         
     }
@@ -77,6 +80,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
         imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeMedium
+        imagePickerController.videoMaximumDuration = 60.0
         imagePickerController.mediaTypes = [kUTTypeMovie as NSString as String]
         present(imagePickerController, animated: true, completion: nil)
         
@@ -193,6 +197,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             let downloadURL = URL(string: url)
             self.routeImageView.sd_setImage(with: downloadURL, placeholderImage: UIImage.init(named: "icon_photo"))
             self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+            
         }
         
         let databaseRef = Database.database().reference()

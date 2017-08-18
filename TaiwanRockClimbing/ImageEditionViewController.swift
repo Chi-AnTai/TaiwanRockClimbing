@@ -104,7 +104,7 @@ class ImageEditionViewController: UIViewController {
     func drawLine(from: CGPoint, to: CGPoint) {
         self.context?.move(to: from)
         self.context?.addLine(to: to)
-        self.context?.setLineWidth(5)
+        self.context?.setLineWidth(4)
         self.context?.setStrokeColor(UIColor.blue.cgColor)
         self.context?.strokePath()
         

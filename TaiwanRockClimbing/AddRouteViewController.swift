@@ -36,7 +36,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     let imagePickerController = UIImagePickerController()
     var difficultyPicker = UIPickerView()
     var difficultyOption = ["V0","V1","V2","V3","V4","V5","V6","V7"]
-    var gym = "STONE"
+    var gym = ""
     @IBOutlet weak var takePhotoButton: UIButton!
     
     @IBOutlet weak var areaTextField: UITextField!
@@ -76,7 +76,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
             
         }
         else{
-            startAnimating(CGSize.init(width: 120, height: 120),message: "uploading")
+            startAnimating(CGSize.init(width: 150, height: 150),message: "uploading")
             let storageRef = Storage.storage().reference()
             let uuid = NSUUID.init()
             if photoImageView.image != nil {
@@ -131,6 +131,8 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
             self.pickPhoto()
         }
         alertController.addAction(pickAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
         
     }
@@ -195,7 +197,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationController?.isNavigationBarHidden = true
+        
         difficultyPicker.delegate = self
         difficultyPicker.dataSource = self
         difficultyTextField.inputView = difficultyPicker
@@ -222,14 +224,4 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-}
+  }
