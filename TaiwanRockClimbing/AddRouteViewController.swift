@@ -116,7 +116,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         
-        let attributedString = NSAttributedString(string: "請盡量橫拍", attributes: [
+        let attributedString = NSAttributedString(string: "選取照片後可以編輯岩點", attributes: [
             NSFontAttributeName : UIFont.systemFont(ofSize: 20), //your font here
             NSForegroundColorAttributeName : UIColor.red
             ])

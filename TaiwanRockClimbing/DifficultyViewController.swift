@@ -122,6 +122,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.difficultyLabel.text = V2V3[indexPath.row].difficulty
             cell.areaColorLabel.text = "\(V2V3[indexPath.row].area)區: \(V2V3[indexPath.row].color)色"
             cell.pointsLabel.text = "岩點數： \(V2V3[indexPath.row].points)"
+            cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
+            cell.difficultyLabel.layer.masksToBounds = true
             return cell        }
             
         else if difficultySegment.selectedSegmentIndex == 2 {
@@ -130,6 +132,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.difficultyLabel.text = V4V5[indexPath.row].difficulty
             cell.areaColorLabel.text = "\(V4V5[indexPath.row].area)區: \(V4V5[indexPath.row].color)色"
             cell.pointsLabel.text = "岩點數： \(V4V5[indexPath.row].points)"
+            cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
+            cell.difficultyLabel.layer.masksToBounds = true
             return cell        }
         else if difficultySegment.selectedSegmentIndex == 3 {
             cell.autoID = V6V7[indexPath.row].autoID
@@ -137,6 +141,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.difficultyLabel.text = V6V7[indexPath.row].difficulty
             cell.areaColorLabel.text = "\(V6V7[indexPath.row].area)區: \(V6V7[indexPath.row].color)色"
             cell.pointsLabel.text = "岩點數： \(V6V7[indexPath.row].points)"
+            cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
+            cell.difficultyLabel.layer.masksToBounds = true
             return cell        }
         else {
             cell.imageURL = V0V1[indexPath.row].image
