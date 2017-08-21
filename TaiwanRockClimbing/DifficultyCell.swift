@@ -14,33 +14,33 @@ struct CurrentUser {
     var email: String
     var password: String
     var uid: String
-
+    
 }
 
 class DifficultyCell: UITableViewCell {
     var imageURL: String?
     var autoID: String?
-
+    
     @IBOutlet weak var difficultyLabel: UILabel!
-
+    
     @IBOutlet weak var numberOfRoute: UILabel!
-
+    
     @IBOutlet weak var pointsLabel: UILabel!
-
+    
     @IBOutlet weak var areaColorLabel: UILabel!
     
     var key:String?
-
+    
 }
 
 
 class GymCell: UITableViewCell {
-
+    
     @IBOutlet weak var gymTitleLabel: UILabel!
 }
 
 class RouteCell: UITableViewCell {
-
+    
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var thunbnailImageView: UIImageView!
     

@@ -14,5 +14,7 @@ target 'TaiwanRockClimbing' do
   pod "IQKeyboardManagerSwift"
   pod "NVActivityIndicatorView"
   pod 'SDWebImage', '~> 4.0'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end
