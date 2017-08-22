@@ -61,7 +61,7 @@ class ImageEditionViewController: UIViewController {
     
     @IBAction func reEditAction(_ sender: Any) {
         UIGraphicsBeginImageContext(editImageView.frame.size)
-        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: 375, height: 607))
+        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-60))
         context = UIGraphicsGetCurrentContext()
         editImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
@@ -115,13 +115,15 @@ class ImageEditionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        editImageView.frame = CGRect.init(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height-60)
         
         UIGraphicsBeginImageContext(editImageView.frame.size)
-        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: 375, height: 607))
+        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-60))
         context = UIGraphicsGetCurrentContext()
         editImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
