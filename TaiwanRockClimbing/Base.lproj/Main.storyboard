@@ -665,9 +665,12 @@
                                     <action selector="reEditAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="94K-hG-5KX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cl7-sd-WsO">
-                                <rect key="frame" x="288" y="23" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cl7-sd-WsO">
+                                <rect key="frame" x="289" y="23" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="PKB-JC-wHh"/>
+                                    <constraint firstAttribute="height" constant="30" id="Rfb-yB-vF8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="編輯完成">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -676,9 +679,12 @@
                                     <action selector="editCompleteAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="NTW-5J-s1d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="697-0g-1pG">
-                                <rect key="frame" x="16" y="23" width="76" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="697-0g-1pG">
+                                <rect key="frame" x="16" y="24" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Dbx-1W-AE5"/>
+                                    <constraint firstAttribute="width" constant="70" id="x1K-38-mUb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="取消編輯">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -691,7 +697,11 @@
                         <color key="backgroundColor" red="0.12941176470588234" green="0.58823529411764708" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="bI2-Lq-lez" firstAttribute="centerX" secondItem="Ozl-ha-B19" secondAttribute="centerX" id="4G8-zc-dkl"/>
+                            <constraint firstItem="697-0g-1pG" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="4" id="CzG-R1-xQ2"/>
+                            <constraint firstAttribute="trailing" secondItem="cl7-sd-WsO" secondAttribute="trailing" constant="16" id="PsK-ko-NLQ"/>
+                            <constraint firstItem="697-0g-1pG" firstAttribute="leading" secondItem="Ozl-ha-B19" secondAttribute="leading" constant="16" id="VFL-pm-uzv"/>
                             <constraint firstItem="bI2-Lq-lez" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="2" id="Weh-I1-we8"/>
+                            <constraint firstItem="cl7-sd-WsO" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="3" id="rha-nL-0ch"/>
                         </constraints>
                     </view>
                     <connections>
