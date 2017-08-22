@@ -61,7 +61,7 @@ class ImageEditionViewController: UIViewController {
     
     @IBAction func reEditAction(_ sender: Any) {
         UIGraphicsBeginImageContext(editImageView.frame.size)
-        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-60))
+        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-80))
         context = UIGraphicsGetCurrentContext()
         editImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
@@ -88,7 +88,7 @@ class ImageEditionViewController: UIViewController {
         if let firstTouch = touches.first {
             lastTouch = firstTouch.location(in: view)
             print(lastTouch.y)
-            lastTouch.y = lastTouch.y - 60
+            lastTouch.y = lastTouch.y - 80
         }
     }
     
@@ -96,7 +96,7 @@ class ImageEditionViewController: UIViewController {
         if let firstTouch = touches.first {
             let touchLocation = firstTouch.location(in: view)
             var adjustTouchlocation = touchLocation
-            adjustTouchlocation.y = adjustTouchlocation.y - 60
+            adjustTouchlocation.y = adjustTouchlocation.y - 80
             drawLine(from: lastTouch, to: adjustTouchlocation)
             lastTouch = adjustTouchlocation
         }
@@ -115,10 +115,10 @@ class ImageEditionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        editImageView.frame = CGRect.init(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height-60)
+        editImageView.frame = CGRect.init(x: 0, y: 80, width: self.view.frame.width, height: self.view.frame.height-80)
         
         UIGraphicsBeginImageContext(editImageView.frame.size)
-        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-60))
+        self.editImage?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-80))
         context = UIGraphicsGetCurrentContext()
         editImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         

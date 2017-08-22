@@ -34,6 +34,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
     }
     var routeInfo: String = ""
+    @IBOutlet weak var zoomoutView: UIView!
+    @IBOutlet weak var zoomoutImageView: UIImageView!
     
     
     @IBOutlet weak var routeInfoLabel: UILabel!
@@ -42,6 +44,10 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     @IBOutlet weak var videoTableView: UITableView!
     
+    @IBAction func zoomoutAction(_ sender: Any) {
+        self.zoomoutView.isHidden = false
+        self.zoomoutImageView.isHidden = false
+    }
     @IBAction func addVideo(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         
@@ -187,16 +193,23 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     
     
-    
+    func tapView() {
+    self.zoomoutView.isHidden = true
+    self.zoomoutImageView.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         routeInfoLabel.text = "\(routeInfo) 目前有\(videoKey.count)部影片"
+        let cancelZoomout = UITapGestureRecognizer(target: self, action: #selector(self.tapView))
+        self.zoomoutView.addGestureRecognizer(cancelZoomout)
+        
         
         if let url = self.rouleImageURL {
             let downloadURL = URL(string: url)
             self.routeImageView.sd_setImage(with: downloadURL, placeholderImage: UIImage.init(named: "icon_photo"))
-            self.routeImageView.contentMode = UIViewContentMode.scaleToFill
+            self.zoomoutImageView.sd_setImage(with: downloadURL)
+            //self.routeImageView.contentMode = UIViewContentMode.scaleAspectFit
             
         }
         
@@ -264,21 +277,21 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 alertController.addAction(cancelAction)
                 
                 let okAction = UIAlertAction(title: "刪除", style: .destructive) { (UIAlertAction) in
-                    
+                    self.startAnimating(CGSize.init(width: 120, height: 120),message: "deleting")
                     let databaseRef = Database.database().reference()
                     databaseRef.child("video").child(self.autoID).child(self.videoKey[indexPath.row]).removeValue()
                     let storageRef = Storage.storage().reference()
                     storageRef.child(self.autoID).child("\(self.videoKey[indexPath.row]).mp4").delete(completion: { (error) in
                         if let error = error {
                             print("\(error)")
-                            
+                            self.stopAnimating()
                         } else {
                             self.imageDic.removeValue(forKey: self.urls[indexPath.row])
                             self.urls.remove(at: indexPath.row)
                             self.uploaderName.remove(at: indexPath.row)
                             self.uploaderEmail.remove(at: indexPath.row)
                             self.videoKey.remove(at: indexPath.row)
-                            
+                            self.stopAnimating()
                             self.videoTableView.reloadData()
                                                    }
                     })

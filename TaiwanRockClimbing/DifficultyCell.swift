@@ -36,7 +36,10 @@ class DifficultyCell: UITableViewCell {
 
 class GymCell: UITableViewCell {
     
+    @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var gymTitleLabel: UILabel!
+    @IBOutlet weak var gymImageView: UIImageView!
+    @IBOutlet weak var gymAddress: UILabel!
 }
 
 class RouteCell: UITableViewCell {

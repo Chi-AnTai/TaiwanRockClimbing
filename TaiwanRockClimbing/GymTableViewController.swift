@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 
 
-class GymTableViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class GymTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NVActivityIndicatorViewable {
     @IBOutlet weak var gymTableView: UITableView!
     var gymTitle: [String] = []
+    var gymAddress: [String] = []
     var currentUser: CurrentUser?
     
     
@@ -23,7 +25,19 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gymCell", for: indexPath) as! GymCell
-        cell.gymTitleLabel.text = gymTitle[indexPath.row]
+                cell.gymTitleLabel.text = gymTitle[indexPath.row]
+        cell.gymAddress.text = gymAddress[indexPath.row]
+        if cell.gymTitleLabel.text == "STONE" {
+            cell.gymImageView.image = UIImage(named: "STONE")
+        } else if cell.gymTitleLabel.text == "原岩攀岩館" {
+            cell.gymImageView.image = UIImage(named: "T-Up Climbing GYM")
+        } else if cell.gymTitleLabel.text == "市民抱石館" {
+            cell.gymImageView.image = UIImage(named: "Civic Bouldergym")
+        }
+        cell.borderView.layer.cornerRadius = 10
+        cell.borderView.layer.borderWidth = 2
+        cell.borderView.layer.borderColor = UIColor(red: 33/255, green: 150/255, blue: 243/255, alpha: 1).cgColor
+
         
         return cell
     }
@@ -43,6 +57,7 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let databaseRef = Database.database().reference()
         if let userID = Auth.auth().currentUser?.uid {
             databaseRef.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -56,10 +71,11 @@ class GymTableViewController: UIViewController,UITableViewDataSource,UITableView
         }
         
         databaseRef.child("gym").observe(.childAdded, with: { (snapshot) in
-            
+            self.startAnimating(CGSize.init(width: 120, height: 120),message: "downloading")
             if let requestData = snapshot.value as? [String:String] {
                 self.gymTitle.append(requestData["title"]!)
-                
+                self.gymAddress.append(requestData["address"]!)
+                self.stopAnimating()
                 self.gymTableView.reloadData()
             }
             

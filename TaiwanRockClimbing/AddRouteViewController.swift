@@ -75,15 +75,16 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
             alertGenerator(message: "points is empty")
             
         }
+        else if photoImageView.image == nil {
+            alertGenerator(message: "image is empty")
+        }
         else{
             startAnimating(CGSize.init(width: 150, height: 150),message: "uploading")
             let storageRef = Storage.storage().reference()
             let uuid = NSUUID.init()
             if photoImageView.image != nil {
-                let resizedPhoto = photoImageView.image?.resizeImageWith(newSize: CGSize(width: 120.0, height: 120.0))
-                let imageData = UIImageJPEGRepresentation(resizedPhoto!, 1)
-                //UIImageJPEGRepresentation(photoImageView.image!, 0.3)
-                //UIImagePNGRepresentation(photoImageView.image!)
+//                let resizedPhoto = photoImageView.image?.resizeImageWith(newSize: CGSize(width: 120.0, height: 120.0))
+                let imageData = UIImageJPEGRepresentation(photoImageView.image!, 1)
                 
                 let uploadImage = storageRef.child("\(uuid).png").putData(imageData!, metadata: nil) { (metadata, error) in
                     guard let metadata = metadata else {
@@ -164,7 +165,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let videoNSURL = info[UIImagePickerControllerMediaURL] as? NSURL
         
-        let lowQualityImage = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.2)
+        let lowQualityImage = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 1)
         photoImageView.image = UIImage(data: lowQualityImage!)
         self.dismiss(animated: true, completion: nil)
         
@@ -173,7 +174,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         let target = storyboard.instantiateViewController(withIdentifier: "ImageEdition") as! ImageEditionViewController
         target.editImage = UIImage(data: lowQualityImage!)
         target.destinationViewController = self
-        self.present(target, animated: false, completion: nil)
+        self.present(target, animated: true, completion: nil)
     }
     
     
@@ -182,10 +183,12 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         return difficultyOption.count
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         difficultyTextField.text = difficultyOption[row]
         return
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         return difficultyOption[row]
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
