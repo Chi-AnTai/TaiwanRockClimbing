@@ -28,9 +28,10 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     var currentUser: CurrentUser?
     var uploaderName: [String] = []
     var uploaderEmail: [String] = []
+    var creator: String = ""
     var videoKey: [String] = [] {
         didSet {
-            routeInfoLabel.text = "\(routeInfo) 目前有\(videoKey.count)部影片"
+            routeInfoLabel.text = "\(routeInfo)目前有 \(videoKey.count) 部影片"
         }
     }
     var routeInfo: String = ""
@@ -44,6 +45,28 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     @IBOutlet weak var videoTableView: UITableView!
     
+    @IBAction func editAction(_ sender: Any) {
+       
+        if currentUser!.email == creator {
+        
+        }
+        else {
+            let alertController = UIAlertController(title: "錯誤", message: "這不是你上傳的路線", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { (_) in
+                return
+            })
+            
+            alertController.addAction(okAction)
+            self.present(
+                alertController,
+                animated: true,
+                completion: nil)
+        }
+        
+        
+        
+        
+    }
     @IBAction func zoomoutAction(_ sender: Any) {
         self.zoomoutView.isHidden = false
         self.zoomoutImageView.isHidden = false
@@ -126,7 +149,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                 if let realdownloadURL = downloadURL {
                     databaseRef.child("video").child(self.autoID).child("\(uuid)").setValue(["url": "\(realdownloadURL)", "name": self.currentUser!.name, "email": self.currentUser!.email])
                 }
-                self.stopAnimating()
+                
                 
             }
         }
@@ -188,6 +211,21 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
     }
     
+    func pinchedView(_ sender: UIPinchGestureRecognizer) {
+        
+        sender.view?.transform = (sender.view?.transform)!.scaledBy(x: sender.scale, y: sender.scale)
+        sender.scale = 1.0
+        
+        if (sender.view?.frame.width)! <= UIScreen.main.bounds.width && (sender.view?.frame.height)! <= UIScreen.main.bounds.height {
+            
+//            zoomoutImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            zoomoutImageView.center.x = UIScreen.main.bounds.width/2
+            zoomoutImageView.center.y = UIScreen.main.bounds.height/2
+            
+        }
+        
+    }
+    
     
     
     
@@ -200,9 +238,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        routeInfoLabel.text = "\(routeInfo) 目前有\(videoKey.count)部影片"
+        routeInfoLabel.text = "\(routeInfo) 目前有 \(videoKey.count) 部影片"
         let cancelZoomout = UITapGestureRecognizer(target: self, action: #selector(self.tapView))
         self.zoomoutView.addGestureRecognizer(cancelZoomout)
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchedView(_:)))
+        self.zoomoutImageView.addGestureRecognizer(pinchGesture)
         
         
         if let url = self.rouleImageURL {
@@ -242,6 +283,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
                             self.imageDic[requestData["url"]!] = thunbImage
                             
                             DispatchQueue.main.async {
+                                self.stopAnimating()
                                 self.videoTableView.reloadData()
                                 
                             }

@@ -100,7 +100,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
                         
                         let databaseRef = Database.database().reference()
                         let difficultyPath = self.difficultyRoute(difficulty: self.difficultyTextField.text!)
-                        let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString, "imageUUID": "\(uuid)", "creator": self.currentUser!.email])
+                        let uploadRoute = databaseRef.child("\(self.gym)Route").child(difficultyPath).childByAutoId().setValue(["area": self.areaTextField.text!, "color": self.colorTextField.text!, "points": self.pointsTextField.text!, "difficulty": self.difficultyTextField.text!, "imageURL": downloadUrlString, "imageUUID": "\(uuid)", "creator": self.currentUser!.email, "creatorName": self.currentUser!.name])
                         self.stopAnimating()
                         self.navigationController?.popViewController(animated: true)
                         
@@ -142,7 +142,7 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
         
         imagePickerController.sourceType = .camera
-        imagePickerController.videoQuality = UIImagePickerControllerQualityType.typeMedium
+        
         
         imagePickerController.cameraCaptureMode = .photo
         imagePickerController.delegate = self
@@ -180,6 +180,9 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if difficultyTextField.text == "" {
+            difficultyTextField.text = "V0"
+        }
         return difficultyOption.count
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -188,6 +191,8 @@ class AddRouteViewController: UIViewController, UIImagePickerControllerDelegate,
         return
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        
         
         return difficultyOption[row]
     }

@@ -57,6 +57,7 @@ class GymTableViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.startAnimating(CGSize.init(width: 120, height: 120),message: "downloading")
         
         let databaseRef = Database.database().reference()
         if let userID = Auth.auth().currentUser?.uid {
@@ -71,7 +72,7 @@ class GymTableViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         databaseRef.child("gym").observe(.childAdded, with: { (snapshot) in
-            self.startAnimating(CGSize.init(width: 120, height: 120),message: "downloading")
+            
             if let requestData = snapshot.value as? [String:String] {
                 self.gymTitle.append(requestData["title"]!)
                 self.gymAddress.append(requestData["address"]!)

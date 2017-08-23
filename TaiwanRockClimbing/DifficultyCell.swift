@@ -20,6 +20,8 @@ struct CurrentUser {
 class DifficultyCell: UITableViewCell {
     var imageURL: String?
     var autoID: String?
+    var creator: String?
+    var imageUUID: String?
     
     @IBOutlet weak var difficultyLabel: UILabel!
     
