@@ -27,6 +27,7 @@ struct routeInfo {
 
 class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDataSource, NVActivityIndicatorViewable {
     var gym = ""
+    var gymImageURL = ""
     var V0V1: [routeInfo] = []
     var V2V3: [routeInfo] = []
     var V4V5: [routeInfo] = []
@@ -127,7 +128,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.imageUUID = V2V3[indexPath.row].imageUUID
             
             cell.difficultyLabel.text = V2V3[indexPath.row].difficulty
-            cell.areaColorLabel.text = "\(V2V3[indexPath.row].area)區: \(V2V3[indexPath.row].color)色 岩點數：\(V2V3[indexPath.row].points)"
+            cell.areaColorLabel.text = "\(V2V3[indexPath.row].area)區: \(V2V3[indexPath.row].color)色"
+            cell.numberOfRoute.text = "岩點數：\(V2V3[indexPath.row].points)"
             cell.pointsLabel.text = "此路線由 \(V2V3[indexPath.row].creatorName) 上傳"
             cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
             cell.difficultyLabel.layer.masksToBounds = true
@@ -140,7 +142,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.imageUUID = V4V5[indexPath.row].imageUUID
             
             cell.difficultyLabel.text = V4V5[indexPath.row].difficulty
-            cell.areaColorLabel.text = "\(V4V5[indexPath.row].area)區: \(V4V5[indexPath.row].color)色 岩點數：\(V4V5[indexPath.row].points)"
+            cell.areaColorLabel.text = "\(V4V5[indexPath.row].area)區: \(V4V5[indexPath.row].color)色"
+            cell.numberOfRoute.text = "岩點數：\(V4V5[indexPath.row].points)"
             cell.pointsLabel.text = "此路線由 \(V4V5[indexPath.row].creatorName) 上傳"
             cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
             cell.difficultyLabel.layer.masksToBounds = true
@@ -152,7 +155,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.imageUUID = V6V7[indexPath.row].imageUUID
             
             cell.difficultyLabel.text = V6V7[indexPath.row].difficulty
-            cell.areaColorLabel.text = "\(V6V7[indexPath.row].area)區: \(V6V7[indexPath.row].color)色 岩點數：\(V6V7[indexPath.row].points)"
+            cell.areaColorLabel.text = "\(V6V7[indexPath.row].area)區: \(V6V7[indexPath.row].color)色"
+            cell.numberOfRoute.text = "岩點數：\(V6V7[indexPath.row].points)"
             cell.pointsLabel.text = "此路線由 \(V6V7[indexPath.row].creatorName) 上傳"
             cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
             cell.difficultyLabel.layer.masksToBounds = true
@@ -164,7 +168,8 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
             cell.imageUUID = V0V1[indexPath.row].imageUUID
             
             cell.difficultyLabel.text = V0V1[indexPath.row].difficulty
-            cell.areaColorLabel.text = "\(V0V1[indexPath.row].area)區: \(V0V1[indexPath.row].color)色 岩點數：\(V0V1[indexPath.row].points)"
+            cell.areaColorLabel.text = "\(V0V1[indexPath.row].area)區: \(V0V1[indexPath.row].color)色"
+            cell.numberOfRoute.text = "岩點數：\(V0V1[indexPath.row].points)"
             cell.pointsLabel.text = "此路線由 \(V0V1[indexPath.row].creatorName) 上傳"
             
             cell.difficultyLabel.layer.cornerRadius = cell.difficultyLabel.frame.width/2
@@ -187,9 +192,9 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
                 targetViewController.gym = self.gym
                 targetViewController.currentUser = self.currentUser
                 targetViewController.rouleImageURL = cell.imageURL
-                if let passID = cell.autoID, let difficulty = cell.difficultyLabel.text, let areaColor = cell.areaColorLabel.text, let creator = cell.creator {
+                if let passID = cell.autoID, let difficulty = cell.difficultyLabel.text, let areaColor = cell.areaColorLabel.text, let creator = cell.creator, let points = cell.numberOfRoute.text {
                     targetViewController.autoID = passID
-                    targetViewController.routeInfo = "\(difficulty)  \(areaColor) "
+                    targetViewController.routeInfo = "\(difficulty)  \(areaColor) \(points) "
                     targetViewController.creator = creator
                 }
                 
@@ -200,13 +205,14 @@ class DifficultyViewController: UIViewController,UITabBarDelegate,UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if gym == "STONE" {
-            gymImageView.image = UIImage(named: "STONE")
-        } else if gym == "原岩攀岩館" {
-            gymImageView.image = UIImage(named: "T-Up Climbing GYM")
-        } else if gym == "市民抱石館" {
-            gymImageView.image = UIImage(named: "Civic Bouldergym")
-        }
+//        if gym == "STONE" {
+//            gymImageView.image = UIImage(named: "STONE")
+//        } else if gym == "原岩攀岩館" {
+//            gymImageView.image = UIImage(named: "T-Up Climbing GYM")
+//        } else if gym == "市民抱石館" {
+//            gymImageView.image = UIImage(named: "Civic Bouldergym")
+//        }
+        gymImageView.sd_setImage(with: URL.init(string: gymImageURL), placeholderImage: UIImage(named: "icon_photo"))
         
         let databaseRef = Database.database().reference()
         

@@ -37,7 +37,7 @@ class DifficultyCell: UITableViewCell {
 
 
 class GymCell: UITableViewCell {
-    
+    var imageURL: String?
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var gymTitleLabel: UILabel!
     @IBOutlet weak var gymImageView: UIImageView!

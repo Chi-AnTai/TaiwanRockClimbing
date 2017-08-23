@@ -17,7 +17,7 @@ class GymTableViewController: UIViewController, UITableViewDataSource, UITableVi
     var gymTitle: [String] = []
     var gymAddress: [String] = []
     var currentUser: CurrentUser?
-    
+    var gymImageURL: [String] = []
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -27,13 +27,15 @@ class GymTableViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "gymCell", for: indexPath) as! GymCell
                 cell.gymTitleLabel.text = gymTitle[indexPath.row]
         cell.gymAddress.text = gymAddress[indexPath.row]
-        if cell.gymTitleLabel.text == "STONE" {
-            cell.gymImageView.image = UIImage(named: "STONE")
-        } else if cell.gymTitleLabel.text == "原岩攀岩館" {
-            cell.gymImageView.image = UIImage(named: "T-Up Climbing GYM")
-        } else if cell.gymTitleLabel.text == "市民抱石館" {
-            cell.gymImageView.image = UIImage(named: "Civic Bouldergym")
-        }
+        cell.imageURL = gymImageURL[indexPath.row]
+        cell.gymImageView.sd_setImage(with: URL.init(string: gymImageURL[indexPath.row]), placeholderImage: UIImage(named: "icon_photo"))
+//        if cell.gymTitleLabel.text == "STONE" {
+//            cell.gymImageView.image = UIImage(named: "STONE")
+//        } else if cell.gymTitleLabel.text == "原岩攀岩館" {
+//            cell.gymImageView.image = UIImage(named: "T-Up Climbing GYM")
+//        } else if cell.gymTitleLabel.text == "市民抱石館" {
+//            cell.gymImageView.image = UIImage(named: "Civic Bouldergym")
+//        }
         cell.borderView.layer.cornerRadius = 10
         cell.borderView.layer.borderWidth = 2
         cell.borderView.layer.borderColor = UIColor(red: 33/255, green: 150/255, blue: 243/255, alpha: 1).cgColor
@@ -49,8 +51,9 @@ class GymTableViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 targetViewController.gym = cell.gymTitleLabel.text!
                 targetViewController.currentUser = self.currentUser
-                
-                
+                if let url = cell.imageURL {
+                targetViewController.gymImageURL = url
+                }
             }
         }
     }
@@ -76,6 +79,7 @@ class GymTableViewController: UIViewController, UITableViewDataSource, UITableVi
             if let requestData = snapshot.value as? [String:String] {
                 self.gymTitle.append(requestData["title"]!)
                 self.gymAddress.append(requestData["address"]!)
+                self.gymImageURL.append(requestData["imageURL"]!)
                 self.stopAnimating()
                 self.gymTableView.reloadData()
             }

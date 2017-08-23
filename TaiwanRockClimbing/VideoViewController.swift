@@ -187,7 +187,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         cell.email = uploaderEmail[indexPath.row]
         cell.name = uploaderName[indexPath.row]
         cell.key = videoKey[indexPath.row]
-        cell.uploaderLabel.text = "Uploaded by \(uploaderName[indexPath.row])"
+        cell.uploaderLabel.text = "此影片由 \(uploaderName[indexPath.row]) 提供"
         
         return cell
     }
