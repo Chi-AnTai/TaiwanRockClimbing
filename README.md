@@ -15,17 +15,14 @@ TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其�
 
 ### 登入畫面
 
- - 需要註冊帳號與信箱認證才可以登入(因為內有與陌生人配對的功能，故設定需要信箱認證) <br />
+ - 需要註冊帳號與信箱認證才可以登入(需要使用者身份來記錄使用者上傳過哪些資料) <br />
 
-<img src="https://github.com/masonchang1991/Eatvago/blob/main/Demo%20Screen%20Shot/loginScreen.png" width = "275" height = "500" alt="Eatvago" align=center />
+<img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/Simulator%20Screen%20Shot%202017%E5%B9%B49%E6%9C%8812%E6%97%A5%20%E4%B8%8B%E5%8D%884.52.57.png" width = "275" height = "500" alt="Eatvago" align=center />
 
 
-### 鄰近使用者附近店家畫面
+### 攀岩場館列表
 
- - 根據使用者位置找到鄰近的餐廳，並提供店家的相關資訊以及距離，也提供導航與加入我的最愛List的功能。<br/>
- - 也能設定使用者頭像以及搜尋條件。<br/>
-
-<img src="https://github.com/masonchang1991/Eatvago/blob/main/Demo%20Screen%20Shot/nearbyViewcontroller%20screen.png" width = "275" height = "500" align=center />                    <img src="https://github.com/masonchang1991/Eatvago/blob/main/Demo%20Screen%20Shot/nearbySetupFilterScreen.png" width = "275" height = "500" align=center />
+<img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/Simulator%20Screen%20Shot%202017%E5%B9%B49%E6%9C%8812%E6%97%A5%20%E4%B8%8B%E5%8D%884.53.24.png" width = "275" height = "500" align=center />                    
 
 ### 提供使用者隨機選取畫面
 
