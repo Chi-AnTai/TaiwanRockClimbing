@@ -22,6 +22,7 @@ TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其�
 ### 攀岩場館列表
 
  - 我們目前有與市民抱石館，STONE以及原岩攀岩館三間岩場的合作，提供該岩場的路線資料 <br />
+ 
 <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/GymSelectView.png" width = "275" height = "500" align=center /></kbd>
 
 ### 路線選擇列表
@@ -33,7 +34,11 @@ TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其�
 ### 路線資訊以及影片
 
  - 路線照片可以點開放大縮小 <br />
-  <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/VideoView.png" width = "275" height = "500" align=center /></kbd>
- <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/ImageZoomIn.PNG" width = "275" height = "500" align=center /></kbd>
- <kbd><img src="hhttps://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/ImageZoomOut.PNG" width = "275" height = "500" align=center /></kbd>
+ 
+  <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/VideoView.png" width = "275" height = "500" align=center /></kbd><kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/ImageZoomIn.PNG" width = "275" height = "500" align=center /></kbd><kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/ImageZoomOut.PNG" width = "275" height = "500" align=center /></kbd>
+  
+### 上傳路線
 
+ - 使用者可以上傳新路線，
+
+ 
