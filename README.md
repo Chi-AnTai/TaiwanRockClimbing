@@ -1,3 +1,4 @@
+## TaiwanRock
 
 TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其他人分享的App，期望可以建立起台灣攀岩的資料庫。<br />
 
@@ -47,6 +48,11 @@ TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其�
 <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/VideoRecord.PNG" width = "275" height = "500" align=center /></kbd>
 <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/VideoPlay.PNG" width = "275" height = "500" align=center /></kbd>
 
+
+## 聯絡方式
+
+Chi-An Tai<br/>
+andy.chian.tai@gmail.com
  
 
  
