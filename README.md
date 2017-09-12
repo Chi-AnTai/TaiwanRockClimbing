@@ -41,6 +41,12 @@ TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其�
 
  - 使用者可以上傳新路線資訊以及照片，並用手指在照片上圈選岩點 <br />
  
- <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/AddRouteView.png" width = "275" height = "500" align=center /></kbd>
+ <kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/AddRouteView.png" width = "275" height = "500" align=center /></kbd><kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/ImageEditionView.PNG" width = "275" height = "500" align=center /></kbd><kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/ImageEdited.PNG" width = "275" height = "500" align=center /></kbd>
+ 
+### 錄製與播放影片
+<kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/VideoRecord.PNG" width = "275" height = "500" align=center /></kbd>
+<kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/VideoPlay.PNG" width = "275" height = "500" align=center /></kbd>
+
+ 
 
  
