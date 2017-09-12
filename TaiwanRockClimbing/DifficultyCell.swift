@@ -20,6 +20,8 @@ struct CurrentUser {
 class DifficultyCell: UITableViewCell {
     var imageURL: String?
     var autoID: String?
+    var creator: String?
+    var imageUUID: String?
     
     @IBOutlet weak var difficultyLabel: UILabel!
     
@@ -35,8 +37,11 @@ class DifficultyCell: UITableViewCell {
 
 
 class GymCell: UITableViewCell {
-    
+    var imageURL: String?
+    @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var gymTitleLabel: UILabel!
+    @IBOutlet weak var gymImageView: UIImageView!
+    @IBOutlet weak var gymAddress: UILabel!
 }
 
 class RouteCell: UITableViewCell {

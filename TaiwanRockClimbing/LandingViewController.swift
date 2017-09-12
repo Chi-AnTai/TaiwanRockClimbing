@@ -128,7 +128,7 @@ class LandingViewController: UIViewController {
     func presentNextViewcontroller() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let target = storyboard.instantiateViewController(withIdentifier: "NavigationController") as UIViewController
-        self.present(target, animated: false, completion: nil)
+        self.present(target, animated: true, completion: nil)
     }
     
     
