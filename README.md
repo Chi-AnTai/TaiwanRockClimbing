@@ -21,9 +21,8 @@ TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其�
 
 
 ### 攀岩場館列表
-<kbd>
-<img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/Simulator%20Screen%20Shot%202017%E5%B9%B49%E6%9C%8812%E6%97%A5%20%E4%B8%8B%E5%8D%884.53.24.png" width = "275" height = "500" align=center />                    
-<kbd/>
+<kbd><img src="https://github.com/Chi-AnTai/TaiwanRockClimbing/blob/master/Readme%20Screenshot/Simulator%20Screen%20Shot%202017%E5%B9%B49%E6%9C%8812%E6%97%A5%20%E4%B8%8B%E5%8D%884.53.24.png" width = "275" height = "500" align=center /></kbd>
+
 ### 提供使用者隨機選取畫面
 
  - 根據使用者現在位置附近的鄰近餐廳，提供使用者隨機選取的戳泡泡功能，幫助有選擇困難症的使用者快速決定要吃什麼。 <br/>
