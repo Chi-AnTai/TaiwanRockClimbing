@@ -1,17 +1,14 @@
 # Eatvago<img src="https://github.com/masonchang1991/Eatvago/blob/main/iTunesArtwork%402x.png" width = "50" height = "50" alt="Eatvago" align=center />   [<img src="https://github.com/masonchang1991/Eatvago/blob/main/Demo%20Screen%20Shot/DownloadAppStoreBadge.png" width = "160" height = "50" alt="Eatvago" align=center />](https://itunes.apple.com/us/app/eatvago/id1273533366)
 
-讓使用者能快速知道附近有什麼餐廳，並提供隨機的方式幫助使用者快速決定吃什麼，也能透過配對機制找到飯友。<br />
+TaiwanRock是一款讓攀岩愛好者可以上傳攀岩路線以及影片與其他人分享的App，期望可以建立起台灣攀岩的資料庫。<br />
 
-＊ 串接 Google Map API取得附近店家資訊 <br/>
-＊ 呼叫 Google Map 進行導航 <br/>
-＊ 使用 Core Location 判斷使用者位置 <br/>
-＊ 使用 Firebase 作為後端資料庫 <br/>
-＊ 使用 Swiftlint 管理code的撰寫 <br/>
+＊ 使用 Firebase Realtime Database 進行即時資料更新 <br/>
+＊ 使用 Firebase Storage 儲存使用者上傳的照片及影片 <br/>
+＊ 使用 CGContext 讓使用者可以編輯圖片 <br/>
+＊ 使用 AVPlayer 播放影片 <br/>
+＊ 使用 Swiftlint 維持程式碼的一致性 <br/>
 ＊ 使用 Firebase Analytics 跟 Fabric Crashlytics <br/>
 
-### Notes: 
-      如果要下載專案，請自行申請 Google MAP API 金鑰，並在依照 AppDelegate 使用的參數名稱加入金鑰的值。
-      另外請自行下載 Firebase 的 GoogleService-Info.plist。
 
 ## Screen Shots
 
