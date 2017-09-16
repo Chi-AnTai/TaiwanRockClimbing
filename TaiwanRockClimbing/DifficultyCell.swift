@@ -10,17 +10,25 @@ import Foundation
 import UIKit
 
 struct CurrentUser {
+    
     var name: String
+    
     var email: String
+    
     var password: String
+    
     var uid: String
     
 }
 
 class DifficultyCell: UITableViewCell {
+    
     var imageURL: String?
+    
     var autoID: String?
+    
     var creator: String?
+    
     var imageUUID: String?
     
     @IBOutlet weak var difficultyLabel: UILabel!
@@ -37,22 +45,31 @@ class DifficultyCell: UITableViewCell {
 
 
 class GymCell: UITableViewCell {
+    
     var imageURL: String?
+    
     @IBOutlet weak var borderView: UIView!
+    
     @IBOutlet weak var gymTitleLabel: UILabel!
+    
     @IBOutlet weak var gymImageView: UIImageView!
+    
     @IBOutlet weak var gymAddress: UILabel!
 }
 
 class RouteCell: UITableViewCell {
     
     @IBOutlet weak var shadowView: UIView!
+    
     @IBOutlet weak var thunbnailImageView: UIImageView!
     
     @IBOutlet weak var playButton: UIButton!
+    
     @IBOutlet weak var uploaderLabel: UILabel!
     
     var key: String?
+    
     var name: String?
+    
     var email: String?
 }

@@ -12,6 +12,7 @@ import Firebase
 class LandingViewController: UIViewController {
     
     @IBOutlet weak var loginSegmentControl: UISegmentedControl!
+    
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,38 +22,45 @@ class LandingViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     @IBAction func registerAction(_ sender: UISegmentedControl) {
+        
         switch loginSegmentControl.selectedSegmentIndex {
+            
         case 1:
             nameTextField.isHidden = true
+            
             loginButton.setTitle("登入", for: .normal)
+            
         default:
+            
             nameTextField.isHidden = false
+            
             loginButton.setTitle("註冊", for: .normal)
         }
     }
     
     @IBAction func registerButton(_ sender: UIButton) {
+        
         switch loginSegmentControl.selectedSegmentIndex {
+            
         case 0:
+            
             if emailTextField.text == "" || nameTextField.text! == "" {
-                let alertController = UIAlertController(
-                    title: "Error",
-                    message: "Please enter your email, password and name",
-                    preferredStyle: .alert)
                 
-                let defaultAction = UIAlertAction(
-                    title: "OK",
-                    style: .cancel,
-                    handler: nil)
+                let alertController = UIAlertController(title: "Error",
+                                                        message: "Please enter your email, password and name",
+                                                        preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK",
+                                                  style: .cancel,
+                                                  handler: nil)
                 
                 alertController.addAction(defaultAction)
                 
                 present(alertController, animated: true, completion: nil)
                 
             } else {
-                Auth.auth().createUser(
-                withEmail: emailTextField.text!,
-                password: passwordTextField.text!) { (user, error) in
+                Auth.auth().createUser(withEmail: emailTextField.text!,
+                                       password: passwordTextField.text!) { (user, error) in
                    
                     if error == nil {
                         print("You have successfully signed up")
@@ -72,21 +80,15 @@ class LandingViewController: UIViewController {
                         self.signin()
                         
                     } else {
-                        let alertController = UIAlertController(
-                            title: "Error",
-                            message: error?.localizedDescription,
-                            preferredStyle: .alert)
+                        let alertController = UIAlertController(title: "Error",
+                                                                message: error?.localizedDescription,
+                                                                preferredStyle: .alert)
                         
-                        let defaultAction = UIAlertAction(
-                            title: "OK",
-                            style: .cancel,
-                            handler: nil)
+                        let defaultAction = UIAlertAction(title: "OK",style: .cancel,handler: nil)
                         
                         alertController.addAction(defaultAction)
                         
-                        self.present(alertController,
-                                     animated: true,
-                                     completion: nil)
+                        self.present(alertController,animated: true,completion: nil)
                     }
                 }
             }
@@ -100,8 +102,12 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        if (UserDefaults.standard.string(forKey: "email")) != nil && (UserDefaults.standard.string(forKey: "password")) != nil {
+        
+        if (UserDefaults.standard.string(forKey: "email")) != nil &&
+            (UserDefaults.standard.string(forKey: "password")) != nil {
+            
             if let account = UserDefaults.standard.string(forKey: "email"),
                 let password = UserDefaults.standard.string(forKey: "password") {
                 
@@ -142,20 +148,24 @@ class LandingViewController: UIViewController {
                     databaseRef
                         .child("Users")
                         .child("\(uid)")
-                        .setValue(["email": self.emailTextField.text!,
-                                   "password": self.passwordTextField.text!,
-                                   "name": self.nameTextField.text!])
+                        .setValue([
+                            "email": self.emailTextField.text!,
+                            "password": self.passwordTextField.text!,
+                            "name": self.nameTextField.text!]
+                    )
                 }
             }
             
         }
     }
+    
     func signin() {
         Auth.auth().signIn(withEmail: self.emailTextField.text!,
                            password: self.passwordTextField.text!,
                            completion: { (User, Error) in
                             
             if Error == nil {
+                
                 UserDefaults.standard.setValue(self.emailTextField.text!,
                                                forKey: "email")
                 
@@ -165,10 +175,9 @@ class LandingViewController: UIViewController {
                 self.presentNextViewcontroller()
             }
             else{
-                let alertController = UIAlertController(
-                    title: "Error",
-                    message: "Login Fail",
-                    preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Error",
+                                                        message: "Login Fail",
+                                                        preferredStyle: .alert)
                 
                 let defaultAction = UIAlertAction(title: "OK",
                                                   style: .cancel,
