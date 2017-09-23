@@ -10,6 +10,8 @@ import UIKit
 
 class ImageEditionViewController: UIViewController {
     
+    @IBOutlet weak var segmentController: UISegmentedControl!
+    
     var editImage: UIImage?
     
     var lastTouch = CGPoint(x: 0, y: 0)
@@ -54,31 +56,56 @@ class ImageEditionViewController: UIViewController {
     @IBOutlet weak var editImageView: UIImageView!
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let firstTouch = touches.first {
+        switch segmentController.selectedSegmentIndex {
+        case 0:
+            if let firstTouch = touches.first {
+                
+                lastTouch = firstTouch.location(in: view)
+                
+                print(lastTouch.y)
+                
+                lastTouch.y = lastTouch.y - 90
+            }
+
+        default:
+            var position = touches.first?.location(in: view)
+            position?.y = (position?.y)!-90
+            let circlePath = UIBezierPath(arcCenter: position!, radius: CGFloat(20), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            self.context?.addPath(circlePath.cgPath)
+            self.context?.setLineWidth(4)
             
-            lastTouch = firstTouch.location(in: view)
+            self.context?.setStrokeColor(UIColor.blue.cgColor)
             
-            print(lastTouch.y)
+            self.context?.strokePath()
             
-            lastTouch.y = lastTouch.y - 80
+            editImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+            
+
         }
+        
+        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if let firstTouch = touches.first {
+        switch segmentController.selectedSegmentIndex {
+        case 0:
+            if let firstTouch = touches.first {
+                
+                let touchLocation = firstTouch.location(in: view)
+                
+                var adjustTouchlocation = touchLocation
+                
+                adjustTouchlocation.y = adjustTouchlocation.y - 80
+                
+                drawLine(from: lastTouch, to: adjustTouchlocation)
+                
+                lastTouch = adjustTouchlocation
+            }
+
+        default: break
             
-            let touchLocation = firstTouch.location(in: view)
-            
-            var adjustTouchlocation = touchLocation
-            
-            adjustTouchlocation.y = adjustTouchlocation.y - 80
-            
-            drawLine(from: lastTouch, to: adjustTouchlocation)
-            
-            lastTouch = adjustTouchlocation
         }
-    }
+            }
     func drawLine(from: CGPoint, to: CGPoint) {
         
         self.context?.move(to: from)
@@ -100,6 +127,8 @@ class ImageEditionViewController: UIViewController {
         
         super.viewDidLoad()
         
+        
+        
         editImageView.frame = CGRect.init(x: 0,
                                           y: 80,
                                           width: self.view.frame.width,
@@ -117,6 +146,19 @@ class ImageEditionViewController: UIViewController {
         
         editImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
+        
+//        let shapeLayer = CAShapeLayer()
+//        shapeLayer.path = circlePath.cgPath
+        
+        //change the fill color
+//        shapeLayer.fillColor = UIColor.clear.cgColor
+//        //you can change the stroke color
+//        shapeLayer.strokeColor = UIColor.red.cgColor
+//        //you can change the line width
+//        shapeLayer.lineWidth = 3.0
+//        
+//        self.view.layer.addSublayer(shapeLayer)
+//        self.view.layer.remove
     }
     
     
