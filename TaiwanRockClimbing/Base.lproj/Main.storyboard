@@ -733,7 +733,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ESL-h5-xL6">
-                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="577"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bI2-Lq-lez">
                                 <rect key="frame" x="150.5" y="22" width="74" height="34"/>
@@ -773,8 +773,19 @@
                                     <action selector="cancelEditAction:" destination="GJs-mt-9Md" eventType="touchUpInside" id="MPf-Ih-0VG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用手指圈選岩點" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Max-Pf-GGG">
-                                <rect key="frame" x="0.0" y="60" width="375" height="20"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OY2-HU-t0Z">
+                                <rect key="frame" x="0.0" y="60" width="375" height="31"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8GS-kS-c4u"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="" image="drawing"/>
+                                    <segment title="" image="blank-circle"/>
+                                </segments>
+                            </segmentedControl>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用手指圈選岩點" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Max-Pf-GGG">
+                                <rect key="frame" x="0.0" y="70" width="375" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="IZp-FM-mIF"/>
@@ -787,13 +798,16 @@
                         <constraints>
                             <constraint firstItem="bI2-Lq-lez" firstAttribute="centerX" secondItem="Ozl-ha-B19" secondAttribute="centerX" id="4G8-zc-dkl"/>
                             <constraint firstItem="ESL-h5-xL6" firstAttribute="width" secondItem="Ozl-ha-B19" secondAttribute="width" id="8jY-6d-r35"/>
+                            <constraint firstItem="OY2-HU-t0Z" firstAttribute="bottom" secondItem="ESL-h5-xL6" secondAttribute="top" id="Afw-C8-uyv"/>
+                            <constraint firstAttribute="trailing" secondItem="OY2-HU-t0Z" secondAttribute="trailing" id="CUi-fF-UCG"/>
                             <constraint firstItem="697-0g-1pG" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="4" id="CzG-R1-xQ2"/>
+                            <constraint firstItem="OY2-HU-t0Z" firstAttribute="leading" secondItem="Ozl-ha-B19" secondAttribute="leading" id="HA7-ht-YQQ"/>
                             <constraint firstItem="ESL-h5-xL6" firstAttribute="leading" secondItem="Ozl-ha-B19" secondAttribute="leading" id="HPT-k6-Gom"/>
                             <constraint firstItem="ESL-h5-xL6" firstAttribute="top" secondItem="Max-Pf-GGG" secondAttribute="bottom" id="MmW-dd-SMZ"/>
                             <constraint firstAttribute="trailing" secondItem="cl7-sd-WsO" secondAttribute="trailing" constant="16" id="PsK-ko-NLQ"/>
                             <constraint firstItem="697-0g-1pG" firstAttribute="leading" secondItem="Ozl-ha-B19" secondAttribute="leading" constant="16" id="VFL-pm-uzv"/>
                             <constraint firstItem="bI2-Lq-lez" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="2" id="Weh-I1-we8"/>
-                            <constraint firstItem="ESL-h5-xL6" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="60" id="a5j-gi-wRo"/>
+                            <constraint firstItem="ESL-h5-xL6" firstAttribute="top" secondItem="hG3-HJ-JYl" secondAttribute="bottom" constant="70" id="a5j-gi-wRo"/>
                             <constraint firstItem="Max-Pf-GGG" firstAttribute="width" secondItem="Ozl-ha-B19" secondAttribute="width" id="dY7-by-cnd"/>
                             <constraint firstItem="Max-Pf-GGG" firstAttribute="centerX" secondItem="Ozl-ha-B19" secondAttribute="centerX" id="jVn-cA-3Po"/>
                             <constraint firstItem="cKA-6r-kJp" firstAttribute="top" secondItem="ESL-h5-xL6" secondAttribute="bottom" id="mXK-FO-7Fm"/>
@@ -802,6 +816,7 @@
                     </view>
                     <connections>
                         <outlet property="editImageView" destination="ESL-h5-xL6" id="voE-Jk-71L"/>
+                        <outlet property="segmentController" destination="OY2-HU-t0Z" id="WOp-cj-bxO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGh-6Z-5oO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -833,6 +848,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="blank-circle" width="32" height="32"/>
+        <image name="drawing" width="16" height="16"/>
         <image name="icon_photo" width="44" height="44"/>
         <image name="play" width="128" height="128"/>
         <image name="rock" width="1920" height="1280"/>
